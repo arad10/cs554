@@ -18,7 +18,7 @@ On both the home and agile board page, a message/video chat icon will be display
 
 3. Firebase - Authentication for users of our application. We will allow traditional email/password logins, as well as the most popular social media login choices (Google, Facebook, Apple, etc.)
 
-# Two Independent Technolgies:
+## Two Independent Technologies:
 
 1. Netlify - Cloud service that we will use to deploy and host our web application. A great feature of Netlify is that it connects to Git repositories - it detects new git pushes and automatically deploys the new changes.
 
