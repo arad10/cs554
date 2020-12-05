@@ -10,6 +10,7 @@ export default function Home() {
       <ul>
         <Link to = "/dashboard"><li>dashboard</li></Link>
         <li><Link to = "/chat"><li>Chat</li></Link></li>
+        <li><Link to = "/videochat"><li>Video Chat</li></Link></li>
       </ul>
     </div>
   )

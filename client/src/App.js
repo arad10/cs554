@@ -3,6 +3,7 @@ import Home from "./components/Home"
 import Login from "./components/Login"
 import Dashboard from "./components/Dashboard"
 import Chat from "./components/Chat"
+import VideoChat from './components/VideoChat';
 
 import {
   BrowserRouter as Router,
@@ -12,14 +13,17 @@ import {
 
 function App() {
   return (
-    <Router>
-      <Switch >
-      <Route exact path = "/" component = {Home}></Route>
-      <Route exact path = "/login" component = {Login}></Route>
-      <Route exact path = "/dashboard" component = {Dashboard}></Route>
+    <div className="app">
+      <Router>
+        <Switch >
+          <Route exact path = "/" component = {Home}></Route>
+          <Route exact path = "/login" component = {Login}></Route>
+          <Route exact path = "/dashboard" component = {Dashboard}></Route>
           <Route exact path = "/chat" component = {Chat}></Route>
-      </Switch>
+          <Route exact path = "/videochat" component = {VideoChat}></Route>
+        </Switch>
       </Router>
+    </div>
   );
 }
 
