@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import { Link } from "react-router-dom";
-import Navbar from "./Navbar"
-import Chat from "./Chat"
+import Navbar from "../Navbar"
+import MyProfile from "./MyProfile"
+
 export default function Home() {
   return (
     <div>
       <Navbar />
-      <h1>hi from homepage</h1>
+      <MyProfile />
       <ul>
         <Link to = "/dashboard"><li>dashboard</li></Link>
         <li><Link to = "/chat"><li>Chat</li></Link></li>

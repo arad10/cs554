@@ -1,5 +1,5 @@
 import './App.scss';
-import Home from "./components/Home"
+import Home from "./components/Home/Home"
 import Login from "./components/Login"
 import Dashboard from "./components/Dashboard"
 import Chat from "./components/Chat"
