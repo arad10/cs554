@@ -151,11 +151,10 @@ video {
 Navbar
 ======
 */
-.navbar {
-  height: 5rem;
-  display: flex;
-  align-items: center;
+
+.navigation {
   background-color: black;
+  height: 5rem;
 }
 .nav-center {
   display: flex;
@@ -190,4 +189,24 @@ Navbar
   width: 13rem;
   height: 4rem;
   float: left;
+}
+
+.error {
+  font-weight: bold;
+  color: red;
+}
+
+.forgotPassword {
+  background: none !important;
+  border: none !important;
+  text-decoration: underline;
+  margin-left: 5px;
+  color: #069; 
+}
+
+
+.forgotPassword:hover{
+  text-decoration: none;
+  color: red;
+
 }

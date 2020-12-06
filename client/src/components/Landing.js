@@ -2,12 +2,12 @@ import React from 'react';
 
 import '../App.scss';
 
-function Home() {
+function Landing() {
   return (
     <div>
-      <h2>This is the Home page</h2>
+      <h2>This is the Landing page</h2>
     </div>
   );
 }
 
-export default Home;
+export default Landing;
