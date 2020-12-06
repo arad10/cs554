@@ -66,22 +66,27 @@ module.exports = {
                 throw "Error: dashboards must be an array or a string";
             }
 
-            const dashboard;
+            let dashboard;
 
             if (Array.isArray(updatedUser.dashboards)){
                 if (typeof updatedUser.dashboards[0] !== 'string'){
                     throw "Error: dashboard id must be a string";
                 }
-                dashboard = dashboardAPI.getDashboard(updatedUser.dashboards[0]);
+                dashboard = await dashboardAPI.getDashboard(updatedUser.dashboards[0]); 
             }
             else{
-                dashboard = dashboardAPI.getDashboard(updatedUser.dashboards);
+                dashboard = await dashboardAPI.getDashboard(updatedUser.dashboards);
             }
 
-            currentUser.dashboards = currentUser.dashboards.push(dashboard._id.str);
+            /* Check if this user is already a part of the dashboard */
+            if (dashboard.users.includes(userId.toString())){
+                throw "Error: user is already a part of the dashboard!";
+            }
 
+            currentUser.dashboards.push(dashboard._id.toString());
+           
             /* Adds this user to the users array in the dashboard collection */
-            const updatedDashboardInfo = await dashboardsCollection.updateOne({_id: dashboard._id}, {$push: {'users': userId.str}});
+            const updatedDashboardInfo = await dashboardsCollection.updateOne({_id: dashboard._id}, {$push: {'users': userId.toString()}});
             if (updatedDashboardInfo.modifiedCount === 0) {
                 throw 'Error: could not update dashboard successfully.';
             }
