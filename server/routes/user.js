@@ -35,7 +35,7 @@ router.post("/", async (req, res) => {
     const newUser = await userAPI.addUser(name);
     res.status(200).json(newUser);
   }catch(e){
-    res.status(400).json({error:e});
+    res.status(500).json({error:e});
   }
 });
 
@@ -59,7 +59,7 @@ router.patch("/:id", async (req, res) => {
       const updatedUser = await userAPI.updateUser(req.params.id, userInfo);
       res.status(200).json(updatedUser);
     }catch(e){
-      res.status(400).json({error:e});
+      res.status(500).json({error:e});
     }
 
   }catch(e){
