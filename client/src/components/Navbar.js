@@ -57,6 +57,16 @@ const NavbarAuth = ()  => {
           </NavLink>
         </li>
         <li>
+          <NavLink exact to="/dashboard" activeClassName="active">
+            Dashboard
+          </NavLink>
+        </li>
+        <li>
+          <NavLink exact to="/videochat" activeClassName="active">
+            Video Chat
+          </NavLink>
+        </li>
+        <li>
           <NavLink exact to="/account" activeClassName="active">
             Account
           </NavLink>

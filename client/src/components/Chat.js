@@ -6,8 +6,7 @@ export default function Chat(props) {
 
   return (
     <div>
-      <Navbar />
-      chat
+      <h1>hi from chat</h1>
     </div>
   )
 }
