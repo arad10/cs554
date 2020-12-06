@@ -1,30 +1,37 @@
-import './App.scss';
-import Home from "./components/Home"
-import Login from "./components/Login"
-import Dashboard from "./components/Dashboard"
-import Chat from "./components/Chat"
-import VideoChat from './components/VideoChat';
+import React from 'react'; 
+import './App.scss'; 
+import { BrowserRouter as Router, Route } from 'react-router-dom'; 
 
-import {
-  BrowserRouter as Router,
-  Route, Switch
-} from "react-router-dom";
+import Account from './components/Account'; 
+import Home from './components/Home'; 
+import Landing from './components/Landing'; 
+import Navbar from './components/Navbar'; 
+import SignIn from './components/SignIn'; 
+import SignUp from './components/SignUp'; 
 
+import { AuthProvider } from './firebase/Auth'; 
+import PrivateRoute from './components/PrivateRoute'; 
 
 function App() {
   return (
-    <div className="app">
-      <Router>
-        <Switch >
-          <Route exact path = "/" component = {Home}></Route>
-          <Route exact path = "/login" component = {Login}></Route>
-          <Route exact path = "/dashboard" component = {Dashboard}></Route>
-          <Route exact path = "/chat" component = {Chat}></Route>
-          <Route exact path = "/videochat" component = {VideoChat}></Route>
-        </Switch>
-      </Router>
-    </div>
-  );
+    <AuthProvider>
+    
+    <Router>
+      <div className="App">
+        <header className="App-header">
+          <Navbar />
+        </header>
+      </div>
+      <Route exact path="/" component={Landing} />
+      <PrivateRoute path="/home" component={Home} />
+      <PrivateRoute path="/account" component={Account} />
+      <Route path="/signin" component={SignIn} />
+      <Route path="/signup" component={SignUp} />
+
+    </Router>
+      
+    </AuthProvider>
+  ); 
 }
 
-export default App;
+export default App; 
