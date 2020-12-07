@@ -1,3 +1,4 @@
+<<<<<<< HEAD:client/src/components/Home/Home.js
 import React, { useState } from 'react'
 import { Link } from "react-router-dom";
 import Navbar from "../Navbar"
@@ -16,3 +17,18 @@ export default function Home() {
     </div>
   )
 }
+=======
+import React from 'react';
+
+import '../App.scss';
+
+function Home() {
+  return (
+    <div>
+      <h2>This is the Home page</h2>
+    </div>
+  );
+}
+
+export default Home;
+>>>>>>> main:client/src/components/Home.js

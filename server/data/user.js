@@ -28,7 +28,7 @@ module.exports = {
 
     async getUser(id){
         if (!id) throw 'Error: id must be provided.';
-        if (typeof id !== 'string' && typeof id !== 'object') throw 'Error: id must be a string or object id.';
+        if (typeof id !== 'string' && !ObjectId.isValid(id)) throw 'Error: id must be a string or object id.';
         if (typeof id === 'string') {
             id = ObjectId.createFromHexString(id);
         }
@@ -44,7 +44,7 @@ module.exports = {
     async updateUser(userId, updatedUser){
         if (!userId) throw 'Error: userId not supplied.';
         if (!updatedUser) throw "Error: updatedUser not supplied.";
-        if (typeof userId !== 'string' && typeof userId !== 'object') throw 'Error: userId must be a string or object id.';
+        if (typeof userId !== 'string' && !ObjectId.isValid(userId)) throw 'Error: userId must be a string or object id.';
         if (typeof userId === 'string') {
             userId = ObjectId.createFromHexString(userId);
         }
