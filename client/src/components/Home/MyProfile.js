@@ -20,6 +20,10 @@ const dashboards = [
   {
     id:3,
     dashboardName: "Dashboard 3"
+  },
+    {
+    id:4,
+    dashboardName: "Dashboard 4"
   }
 ]
 
@@ -27,14 +31,14 @@ const MyProfile = () => {
   // for each project id in id array, should get the projects by id and display name. when click on name brings to dashboard (when backend is built).
   const projects = dashboards.map(project=>{
             return(
-          <Link to = "/dashboard" className="link"><li>{project.dashboardName}</li></Link>
+          <Link to = {`dashboard/${project.id}`} className="link"><li>{project.dashboardName}</li></Link>
           )})
   return (
     <Wrapper>
       <div className="profile">
       <div className = "info">
-        <h1>My Projects</h1>
-        <h2>@{profileInfo.username}</h2>  
+        <h1 className = "myProject">My Projects</h1>
+        <h2 className = "username">@{profileInfo.username}</h2>  
         </div>
         <ul>
           {projects}
@@ -47,37 +51,53 @@ const MyProfile = () => {
 const Wrapper = styled.article`
   .profile {
     margin: 2%;
-    background: white;
+    background: rgb(216, 238, 235);
     position: relative;
     height: 400px;
     width: 50%;
+    border-radius: 10px;
+
   }
   .info{
     margin: 3%
   }
-  h1{
+  .myProject{
     padding-top: 2.5%;
     font-size: 32px;
+    color: black;
+    font-weight: bolder;
 
   }
-  h2{
+  .username{
     font-weight: lighter;
+    text-align: left;
+    color: black;
+  }
+  ul{
+    overflow:hidden; 
+    overflow-y:scroll;
+    width:95%;
+    background-color: white;
+    margin:2%;
+    height: 250px;
+    border-radius: 5px;
+
   }
 
   li{
     list-style: none;
     border-radius: 25px;
     border: 2px solid black;
-    background: rgb(216, 238, 235);
+    background: lightgray;
     padding: 20px;
-    width: 80%;
+    width: 90%;
     height: 60px;  
     margin: 2%;
 
       }
-    .link{
-      text-decoration: none;
-      color: black;
+  .link{
+    text-decoration: none;
+    color: black;
 
     }
 `;
