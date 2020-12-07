@@ -51,10 +51,12 @@ const MyProfile = () => {
 const Wrapper = styled.article`
   .profile {
     background: rgb(216, 238, 235);
-    width: 50%;
+    width: 60%;
     border-radius: 10px;
     margin: auto;
     padding-bottom: 2%;
+    margin-bottom: 2%;
+
 
 
   }
@@ -72,6 +74,7 @@ const Wrapper = styled.article`
     font-weight: lighter;
     text-align: left;
     color: black;
+    font-size: 20px;
   }
   ul{
     width:95%;

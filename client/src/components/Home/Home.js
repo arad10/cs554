@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
-import { Link } from "react-router-dom";
-import Navbar from "../Navbar"
 import MyProfile from "./MyProfile"
 import AllProjects from "./AllProjects"
 import './Home.scss';
+import NewDashboard from "./NewDashboard"
 
 export default function Home() {
   const [showMyProject, setMyProject] = useState(true)
@@ -25,6 +24,7 @@ export default function Home() {
           }}>My Projects</button></li>
           <li><button onClick={() => {handleAllProjects()
           }}>All Projects</button></li>
+          <li><NewDashboard/></li>
         </ul>
         <MyProfile />
       </div>
@@ -37,6 +37,8 @@ export default function Home() {
           }}>My Projects</button></li>
           <li><button onClick={() => {handleAllProjects()
           }}>All Projects</button></li>
+          <li><NewDashboard/></li>
+
         </ul>
         <AllProjects />
       </div>
