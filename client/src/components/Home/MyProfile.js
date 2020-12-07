@@ -50,12 +50,12 @@ const MyProfile = () => {
 
 const Wrapper = styled.article`
   .profile {
-    margin: 2%;
     background: rgb(216, 238, 235);
-    position: relative;
-    height: 400px;
     width: 50%;
     border-radius: 10px;
+    margin: auto;
+    padding-bottom: 2%;
+
 
   }
   .info{
@@ -74,12 +74,8 @@ const Wrapper = styled.article`
     color: black;
   }
   ul{
-    overflow:hidden; 
-    overflow-y:scroll;
     width:95%;
-    background-color: white;
     margin:2%;
-    height: 250px;
     border-radius: 5px;
 
   }

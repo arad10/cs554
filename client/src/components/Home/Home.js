@@ -1,34 +1,45 @@
-<<<<<<< HEAD:client/src/components/Home/Home.js
 import React, { useState } from 'react'
 import { Link } from "react-router-dom";
 import Navbar from "../Navbar"
 import MyProfile from "./MyProfile"
+import AllProjects from "./AllProjects"
+import './Home.scss';
 
 export default function Home() {
+  const [showMyProject, setMyProject] = useState(true)
+  const [showAllProject, setAllProject] = useState(false)
+
+  const handleAllProjects = () =>{
+    setMyProject(false);
+    setAllProject(true);
+  }
+  const handleMyProjects = () =>{
+    setAllProject(false);
+    setMyProject(true);
+  }
+  if(showMyProject===true){
+    return (
+      <div>
+        <ul className = "project-links">
+          <li><button onClick={() => {handleMyProjects()
+          }}>My Projects</button></li>
+          <li><button onClick={() => {handleAllProjects()
+          }}>All Projects</button></li>
+        </ul>
+        <MyProfile />
+      </div>
+  )
+} else{
   return (
-    <div>
-      <Navbar />
-      <MyProfile />
-      <ul>
-        <Link to = "/dashboard"><li>dashboard</li></Link>
-        <li><Link to = "/chat"><li>Chat</li></Link></li>
-        <li><Link to = "/videochat"><li>Video Chat</li></Link></li>
-      </ul>
-    </div>
+      <div>
+        <ul className = "project-links">
+          <li><button onClick={() => {handleMyProjects()
+          }}>My Projects</button></li>
+          <li><button onClick={() => {handleAllProjects()
+          }}>All Projects</button></li>
+        </ul>
+        <AllProjects />
+      </div>
   )
 }
-=======
-import React from 'react';
-
-import '../App.scss';
-
-function Home() {
-  return (
-    <div>
-      <h2>This is the Home page</h2>
-    </div>
-  );
 }
-
-export default Home;
->>>>>>> main:client/src/components/Home.js

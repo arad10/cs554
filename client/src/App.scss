@@ -167,6 +167,8 @@ Navbar
   display: flex;
   list-style-type: none;
   padding-top: 0.75rem;
+  float: right;
+  margin-right: 2%;
 }
 .nav-links a {
   text-transform: capitalize;
@@ -200,12 +202,10 @@ Navbar
   border: none !important;
   text-decoration: underline;
   margin-left: 5px;
-  color: #069; 
+  color: #069;
 }
 
-
-.forgotPassword:hover{
+.forgotPassword:hover {
   text-decoration: none;
   color: red;
-
 }

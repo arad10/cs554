@@ -1,23 +1,11 @@
-<<<<<<< HEAD
+import React from 'react'; 
 import './App.scss';
-import Home from "./components/Home/Home"
-import Login from "./components/Login"
-import Dashboard from "./components/Dashboard"
-import Chat from "./components/Chat"
-import VideoChat from './components/VideoChat';
-
 import {
   BrowserRouter as Router,
   Route, Switch
 } from "react-router-dom";
-=======
-import React from 'react'; 
-import './App.scss'; 
-import { BrowserRouter as Router, Route } from 'react-router-dom'; 
->>>>>>> main
-
 import Account from './components/Account'; 
-import Home from './components/Home'; 
+import Home from './components/Home/Home'; 
 import Landing from './components/Landing'; 
 import Navbar from './components/Navbar'; 
 import Dashboard from './components/Dashboard'; 
