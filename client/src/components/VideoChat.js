@@ -36,6 +36,7 @@ const VideoChat = () => {
 
     let render;
     if (token) {
+        console.log(token);
         render = (
             <Room roomName={roomName} token={token} handleLogout={handleLogout} />
         );
