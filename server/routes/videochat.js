@@ -11,10 +11,6 @@ const sendTokenResponse = (token, res) => {
       })
     );
   };
-
-  router.get('/', (req, res) => {
-    res.json({message: "Route works!"})
-  });
   
 router.get('/chat/token', (req, res) => {
     const identity = req.query.identity;

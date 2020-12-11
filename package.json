@@ -6,7 +6,6 @@
     "start": "cd server && node app.js",
     "heroku-postbuild": "cd client && npm install && npm run build"
   },
-  "proxy": "http://localhost:4000",
   "dependencies": {
     "body-parser": "^1.19.0",
     "cookie-parser": "~1.4.4",
