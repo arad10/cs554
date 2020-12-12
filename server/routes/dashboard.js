@@ -1,4 +1,5 @@
 const express = require("express");
+const dashboard = require("../data/dashboard");
 const router = express.Router();
 const dashboardAPIs = require("../data").dashboard;
 
@@ -7,6 +8,12 @@ router.get('/:id', async (req, res) => {
     const dashboard = await dashboardAPIs.getDashboard(id);
     res.json(dashboard);
 });
+
+router.post("/:id/addMessage"){
+    const id = req.params.id;
+    const addMessage = await dashboardAPIs.addChatMessage(id);
+    res.json(addMessage); //will return just the message
+}
 
 router.post('/', async (req, res) => {
     console.log(req.body);
