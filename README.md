@@ -10,6 +10,13 @@ Our final project will be an agile management website built with React and deplo
 
 On both the home and agile board page, a message/video chat icon will be displayed on the bottom right-hand corner of the screen. This icon will be a button that will enable a chat feature between you and your teammates. In addition, the chat will enable a video call option (in case you and your teammate want to talk out loud vs in chat). We will utilize Socket.io for the chat feature and Twilio for the video chat feature. We thought this feature would be especially useful in today’s world for agile teams while working from home. It would make this application an “all-in-one” site for agile teams, without them needing to rely on external chat or meeting technologies. Some stretch goals we had were having a team meeting scheduler page and an open video room for any member to join.
 
+## Run Seed Database
+
+```bash
+cd server/tasks
+npm run seed
+```
+
 ## Three Course Technologies:
 
 1. React - Front-end framework for creating our single-page app. We will utilize function components for our pages and also nested components for features such as user stories.

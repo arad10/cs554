@@ -15,11 +15,11 @@ import SignUp from './components/SignUp';
 import VideoChat from './components/VideoChat'; 
 import { AuthProvider } from './firebase/Auth'; 
 import PrivateRoute from './components/PrivateRoute'; 
+import Axios from "axios";
 
 function App() {
   return (
     <AuthProvider>
-    
     <Router>
       <div className="App">
         <header className="App-header">
@@ -35,9 +35,7 @@ function App() {
 
       <Route path="/signin" component={SignIn} />
       <Route path="/signup" component={SignUp} />
-
-    </Router>
-      
+    </Router>    
     </AuthProvider>
   ); 
 }

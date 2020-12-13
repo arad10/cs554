@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import ReactDOM from 'react-dom';
 import Modal from 'react-modal';
 import styled from "styled-components";
+import axios from "axios";
 
 const customStyles = {
   content : {
@@ -15,9 +16,11 @@ const customStyles = {
     width: "40%"
   }
 };
+
 export default function NewDashboard() {
   var subtitle;
   const [modalIsOpen,setIsOpen] = useState(false);
+
   function openModal() {
     setIsOpen(true);
   }
@@ -43,9 +46,11 @@ export default function NewDashboard() {
             <form>
             <label>Project Name:<input type="text" name="name" required/></label>
             <br></br>
-            <label>Description:<input type="text" name="name" required /></label>
+            <label>Description:<input type="text"  name="desc" required /></label>
             <br></br>
-            <label>Date name:<input type="text" name="name" required/></label>
+            <label>Date:<input type="text" name="date" required/></label>
+            <br></br>
+            <label>Creator:<input type="text" name="creator" required/></label>
             <br></br>
               <button className="submit" type="submit">Submit</button>
               </form>

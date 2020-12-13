@@ -21,16 +21,17 @@ const NavbarAuth = ()  => {
       </div>
 
       <ul className="nav-links">
-          {/* <li>
+          <li>
           <NavLink exact to="/" activeClassName="active">
             Landing
           </NavLink>
-        </li> */}
+        </li>
         <li>
           <NavLink exact to="/home" activeClassName="active">
             Home
           </NavLink>
         </li>
+        {/* commented out dashboard since it will be accessed through clicking on projects */}
         {/* <li>
           <NavLink exact to="/dashboard" activeClassName="active">
             Dashboard

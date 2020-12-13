@@ -9,7 +9,7 @@ const VideoChat = () => {
 
     const handleUsernameChange = useCallback( (event) => {
         setUsername(event.target.value);
-      }, []);
+    }, []);
     
     const handleRoomNameChange = useCallback( (event) => {
         setRoomName(event.target.value);

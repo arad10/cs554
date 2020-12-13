@@ -1,32 +1,23 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import axios from "axios"
 
-//dummy data for now
-const dashboards = [
-  {
-    id:1,
-    dashboardName: "Dashboard 1",
-  },
-  {
-    id:2,
-    dashboardName: "Dashboard 2"
-  },
-  {
-    id:3,
-    dashboardName: "Dashboard 3"
-  },
-    {
-    id:4,
-    dashboardName: "Dashboard 4"
-  }
-]
 
 const AllProjects = () => {
-  // for each project id in id array, should get the projects by id and display name. when click on name brings to dashboard (when backend is built).
-  const projects = dashboards.map(project=>{
+  const [proj, setProj] = useState([]);
+  useEffect(() => {
+    axios('/dashboard').then(res => {
+    const data = res.data;
+    console.log(res)
+    setProj(data);
+  });
+  }, [])
+
+
+  const projects = proj.map(project=>{
             return(
-          <Link to = {`dashboard/${project.id}`} className="link"><li>{project.dashboardName}</li></Link>
+          <Link to = {`dashboard/${project.id}`} className="link"><li>{project.name}</li></Link>
           )})
   return (
     <Wrapper>
