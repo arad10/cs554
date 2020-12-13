@@ -4,11 +4,12 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 var logger = require('morgan');
-
 const configRoutes = require('./routes');
 
-var app = express();
 
+var app = express();
+var cors = require('cors')
+app.use(cors())
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
