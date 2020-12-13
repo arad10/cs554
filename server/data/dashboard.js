@@ -2,6 +2,12 @@ const mongoCollections = require("../config/mongoCollections");
 const dashboards = mongoCollections.dashboards;
 const { ObjectId } = require("mongodb");
 
+async function getAllDashboards() {
+    const dashboardCollection = await dashboards();
+    const dashboardAll = await dashboardCollection.find({}).toArray();
+    return dashboardAll;
+    
+}
 async function getDashboard(id) {
     if (!id || typeof id !== "string") throw "ERROR: Dashboard ID not provided or is not of type string";
     if (!ObjectId.isValid(id))
@@ -70,5 +76,6 @@ async function updateDashboard(dashboardID, origin, originList, destination, des
 module.exports = {
     getDashboard,
     addDashboard,
-    updateDashboard
+    updateDashboard,
+    getAllDashboards
 };
