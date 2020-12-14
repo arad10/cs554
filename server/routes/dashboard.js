@@ -9,11 +9,13 @@ router.get('/:id', async (req, res) => {
     res.json(dashboard);
 });
 
-router.post("/:id/addMessage"){
+router.post("/:id/addMessage", async (req, res) => {
     const id = req.params.id;
-    const addMessage = await dashboardAPIs.addChatMessage(id);
+    let msg = req.body;
+    console.log(req.body);
+    const addMessage = await dashboardAPIs.addChatMessage(id, msg);
     res.json(addMessage); //will return just the message
-}
+});
 
 router.post('/', async (req, res) => {
     console.log(req.body);

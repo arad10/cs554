@@ -4,6 +4,7 @@ const { ObjectId } = require("mongodb");
 const { dashboard } = require(".");
 
 async function getDashboard(id) {
+    console.log(id);
     if (!id || typeof id !== "string") throw "ERROR: Dashboard ID not provided or is not of type string";
     if (!ObjectId.isValid(id))
         throw "ERROR: Dashboard ID is not valid. Please pass in a single string of 12 bytes or 24 hex characters";
@@ -70,16 +71,17 @@ async function updateDashboard(dashboardID, origin, originList, destination, des
 }
 
 async function addChatMessage(dashboardID, message){
+    console.log(message);
     if(!dashboardID || typeof dashboardID !== "string"){
         throw "ERROR: Dashboard ID does not exist or is not of type string";
     }
     else if(!message || typeof message !== "object"){
         throw "ERROR: Message does not exist or is not of type object";;
     }
-    else if(!message.userName || typeof message.userName !== "string"){
+    else if(!message.username || typeof message.username !== "string"){
         throw "ERROR: Message doesn't contain a username or is not of type string";
     }
-    else if(!message.msg || typeof message.msg !== "string"){
+    else if(message.msg === undefined || message.msg === null || typeof message.msg !== "string"){
         throw "ERROR: Message doesn't contain the message or is not of type string";
     }
     const dashboardCollection = await dashboards();
@@ -97,5 +99,6 @@ async function addChatMessage(dashboardID, message){
 module.exports = {
     getDashboard,
     addDashboard,
-    updateDashboard
+    updateDashboard,
+    addChatMessage
 };
