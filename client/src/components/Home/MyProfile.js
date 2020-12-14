@@ -1,8 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import firebase from "firebase/app"
 
 //dummy data for now
+
 const profileInfo = {
     id: 1,
     username: "jessvalenzuela",
@@ -29,8 +31,10 @@ const dashboards = [
 
 const MyProfile = () => {
   // for each project id in id array, should get the projects by id and display name. when click on name brings to dashboard (when backend is built).
+    const currentUser = firebase.auth().currentUser
+    // console.log(currentUser.email)
   const projects = dashboards.map(project=>{
-            return(
+    return(
           <Link to = {`dashboard/${project.id}`} className="link"><li>{project.dashboardName}</li></Link>
           )})
   return (
@@ -38,7 +42,7 @@ const MyProfile = () => {
       <div className="profile">
       <div className = "info">
         <h1 className = "myProject">My Projects</h1>
-        <h2 className = "username">@{profileInfo.username}</h2>  
+        <h2 className = "username">{currentUser.email}</h2>  
         </div>
         <ul>
           {projects}
