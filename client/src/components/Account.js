@@ -7,8 +7,6 @@ import ChangePassword from './ChangePassword';
 function Account() {
   return (
     <div>
-      <h2>This is the account page</h2>
-      <SignOutButton />
       <ChangePassword />
     </div>
   );

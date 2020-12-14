@@ -44,7 +44,7 @@ const NavbarAuth = ()  => {
         </li>
         <li>
           <NavLink exact to="/account" activeClassName="active">
-            Account
+            <img src = "https://bethesdadentalhealth.com/wp-content/uploads/2016/10/profile-icon-png-898.png" className = "profile-icon" alt = "profile"></img>
           </NavLink>
         </li>
         <li>
