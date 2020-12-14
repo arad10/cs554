@@ -17,12 +17,17 @@ router.get("/:id", async (req, res) => {
     }
   });
 
-/* Creates a new user from the req.body details - Will eventually need an id field that is supplied by Firebase */
+/* Creates a new user from the req.body details - id field is supplied by Firebase uid string */
 router.post("/", async (req, res) => {
   let userInfo = req.body;
 
   if (!userInfo) {
     res.status(400).json({error: 'You must provide data to create a user.'});
+    return;
+  }
+
+  if (!xss(userInfo.id)) {
+    res.status(400).json({error: 'You must provide a user id from firebase.'});
     return;
   }
 
@@ -32,8 +37,8 @@ router.post("/", async (req, res) => {
   }
 
   try{
-    const { name } = userInfo;
-    const newUser = await userAPI.addUser(name);
+    const { id, name } = userInfo;
+    const newUser = await userAPI.addUser(id, name);
     res.status(200).json(newUser);
   }catch(e){
     res.status(500).json({error:e});
