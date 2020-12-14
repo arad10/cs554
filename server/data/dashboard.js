@@ -3,6 +3,12 @@ const dashboards = mongoCollections.dashboards;
 const { ObjectId } = require("mongodb");
 const { dashboard } = require(".");
 
+async function getAllDashboards() {
+    const dashboardCollection = await dashboards();
+    const dashboardAll = await dashboardCollection.find({}).toArray();
+    return dashboardAll;
+    
+}
 async function getDashboard(id) {
     console.log(id);
     if (!id || typeof id !== "string") throw "ERROR: Dashboard ID not provided or is not of type string";
@@ -100,5 +106,6 @@ module.exports = {
     getDashboard,
     addDashboard,
     updateDashboard,
-    addChatMessage
+    addChatMessage,
+    getAllDashboards
 };

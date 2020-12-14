@@ -21,32 +21,7 @@ const NavbarAuth = ()  => {
       </div>
 
       <ul className="nav-links">
-        {/* <li>
-          <NavLink exact to ="/home" activeClassName="active">
-            Home
-          </NavLink>
-        </li>
-
-        <li>
-          <NavLink exact to ="/videochat" activeClassName="active">
-            Video Chat
-          </NavLink>
-        </li>
-
-        <li>
-          <NavLink exact to ="/dashboard" activeClassName="active">
-            Dashboard
-          </NavLink>
-        </li>
-
-        <li>
-          <NavLink exact to ="/signin" activeClassName="active">
-            Signin
-          </NavLink>
-        </li>
-         */}
-
-         <li>
+          <li>
           <NavLink exact to="/" activeClassName="active">
             Landing
           </NavLink>
@@ -56,11 +31,12 @@ const NavbarAuth = ()  => {
             Home
           </NavLink>
         </li>
-        <li>
+        {/* commented out dashboard since it will be accessed through clicking on projects */}
+        {/* <li>
           <NavLink exact to="/dashboard" activeClassName="active">
             Dashboard
           </NavLink>
-        </li>
+        </li> */}
         <li>
           <NavLink exact to="/videochat" activeClassName="active">
             Video Chat

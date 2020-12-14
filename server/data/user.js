@@ -11,7 +11,6 @@ module.exports = {
         if (typeof name !== 'string') throw 'Error: name must be a string.';
 
         const usersCollection = await users();
-       
         let user = {
             name: name,
             dashboards: []

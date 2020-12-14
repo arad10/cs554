@@ -1,9 +1,11 @@
 import React from 'react'; 
-import './App.scss'; 
-import { BrowserRouter as Router, Route } from 'react-router-dom'; 
-
+import './App.scss';
+import {
+  BrowserRouter as Router,
+  Route, Switch
+} from "react-router-dom";
 import Account from './components/Account'; 
-import Home from './components/Home'; 
+import Home from './components/Home/Home'; 
 import Landing from './components/Landing'; 
 import Navbar from './components/Navbar'; 
 import Dashboard from './components/Dashboard'; 
@@ -13,11 +15,11 @@ import SignUp from './components/SignUp';
 import VideoChat from './components/VideoChat'; 
 import { AuthProvider } from './firebase/Auth'; 
 import PrivateRoute from './components/PrivateRoute'; 
+import Axios from "axios";
 
 function App() {
   return (
     <AuthProvider>
-    
     <Router>
       <div className="App">
         <header className="App-header">
@@ -33,9 +35,7 @@ function App() {
 
       <Route path="/signin" component={SignIn} />
       <Route path="/signup" component={SignUp} />
-
-    </Router>
-      
+    </Router>    
     </AuthProvider>
   ); 
 }
