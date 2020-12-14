@@ -25,7 +25,6 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "proxy": "http://localhost:4000",
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -49,5 +48,6 @@
     "express": "^4.17.1",
     "npm-run-all": "^4.1.5",
     "twilio": "^3.33.0"
-  }
+  },
+  "proxy": "http://localhost:4000"
 }
