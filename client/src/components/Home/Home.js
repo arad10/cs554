@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import MyProfile from "./MyProfile"
 import AllProjects from "./AllProjects"
 import './Home.scss';

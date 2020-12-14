@@ -17,7 +17,14 @@ const AllProjects = () => {
 
   const projects = proj.map(project=>{
             return(
-          <Link to = {`dashboard/${project.id}`} className="link"><li>{project.name}</li></Link>
+            <li>
+              <h2 className= "pname">{project.name}</h2>
+              <p>{project.description}</p>
+              <Link to = {`dashboard/${project._id}`} className="link">
+                <button className="join">View</button>
+              </Link>
+              <button className="join">Join</button>
+              </li>
           )})
   return (
     <Wrapper>
@@ -68,14 +75,29 @@ const Wrapper = styled.article`
     background: lightgray;
     padding: 20px;
     width: 90%;
-    height: 60px;  
+    height: 100px;  
     margin: 2%;
 
       }
   .link{
     text-decoration: none;
     color: black;
-
     }
+    .pname{
+      font-size: 14px;
+      text-align: left;
+      font-weight: bold;
+      margin:0px;
+    }
+    .join{
+      height:25px;
+      font-size:12px;
+      margin-right: 2px;
+    }
+    p{
+      font-size: 12px;
+      margin:0px;
+    }
+
 `;
 export default AllProjects;
