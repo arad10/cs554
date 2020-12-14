@@ -1,11 +1,12 @@
 var express = require('express');
+const xss = require("xss");
 var router = express.Router();
 const userStoryAPI = require("../data").userStory;
 
 /* Gets user story by id */
 router.get("/:id", async (req, res) => {
     try{
-        const userStoryObj = await userStoryAPI.getUserStory(req.params.id);
+        const userStoryObj = await userStoryAPI.getUserStory(xss(req.params.id));
         try{
             res.status(200).json(userStoryObj);
         }catch(e){
@@ -25,42 +26,42 @@ router.post("/", async (req, res) => {
     return;
   }
 
-  if (!userStoryInfo.dashboardName) {
+  if (!xss(userStoryInfo.dashboardName)) {
     res.status(400).json({error: 'You must provide a dashboard name.'});
     return;
   }
 
-  if (!userStoryInfo.dashboardId) {
+  if (!xss(userStoryInfo.dashboardId)) {
     res.status(400).json({error: 'You must provide a dashboard id.'});
     return;
   }
 
-  if (!userStoryInfo.storyName) {
+  if (!xss(userStoryInfo.storyName)) {
     res.status(400).json({error: 'You must provide a story name.'});
     return;
   }
 
-  if (!userStoryInfo.storyPoints) {
+  if (!xss(userStoryInfo.storyPoints)) {
     res.status(400).json({error: 'You must provide story points.'});
     return;
   }
 
-  if (!userStoryInfo.description) {
+  if (!xss(userStoryInfo.description)) {
     res.status(400).json({error: 'You must provide a description.'});
     return;
   }
 
-  if (!userStoryInfo.postedDate) {
+  if (!xss(userStoryInfo.postedDate)) {
     res.status(400).json({error: 'You must provide a posted date.'});
     return;
   }
 
-  if (!userStoryInfo.creator) {
+  if (!xss(userStoryInfo.creator)) {
     res.status(400).json({error: 'You must provide a creator.'});
     return;
   }
 
-  if (!userStoryInfo.status) {
+  if (!xss(userStoryInfo.status)) {
     res.status(400).json({error: 'You must provide a status.'});
     return;
   }
@@ -77,7 +78,7 @@ router.post("/", async (req, res) => {
 /* Updates user story with the supplied id */
 router.patch("/:id", async (req, res) => {
   try{
-    const userStory = await userStoryAPI.getUserStory(req.params.id);
+    const userStory = await userStoryAPI.getUserStory(xss(req.params.id));
     let userStoryInfo = req.body;
 
     if (!userStoryInfo) {
@@ -85,13 +86,13 @@ router.patch("/:id", async (req, res) => {
       return;
     }
 
-    if (!userStoryInfo.storyName && !userStoryInfo.storyPoints && !userStoryInfo.description && !userStoryInfo.status) {
+    if (!xss(userStoryInfo.storyName) && !xss(userStoryInfo.storyPoints) && !xss(userStoryInfo.description) && !xss(userStoryInfo.status)) {
       res.status(400).json({error: 'You must provide at least the name or dashboards fields to update a user.'});
       return;
     }
 
     try{
-      const updatedUserStory = await userStoryAPI.updateUserStory(req.params.id, userStoryInfo);
+      const updatedUserStory = await userStoryAPI.updateUserStory(xss(req.params.id), userStoryInfo);
       res.status(200).json(updatedUserStory);
     }catch(e){
       res.status(500).json({error:e});
@@ -105,9 +106,9 @@ router.patch("/:id", async (req, res) => {
 /* Deletes user story with the supplied id */
 router.delete("/:id", async (req, res) => {
     try{
-        const userStory = await userStoryAPI.getUserStory(req.params.id);
+        const userStory = await userStoryAPI.getUserStory(xss(req.params.id));
         try{
-            let deletedUserStory = await userStoryAPI.deleteUserStory(req.params.id);
+            let deletedUserStory = await userStoryAPI.deleteUserStory(xss(req.params.id));
             res.status(200).json(deletedUserStory);
         }catch(e){
             res.status(500).json({error:e});
