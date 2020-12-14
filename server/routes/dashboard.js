@@ -9,6 +9,15 @@ router.get('/:id', async (req, res) => {
     res.json(dashboard);
 });
 
+router.get('/', async(req, res)=>{
+    try{
+        let dashboardAll = await dashboardAPIs.getAllDashboards();
+        res.json(dashboardAll);
+    } catch(e){
+        res.status(404).send
+    }
+})
+
 router.post('/', async (req, res) => {
     console.log(req.body);
     const insertDashboard = await dashboardAPIs.addDashboard(

@@ -5,7 +5,6 @@ var cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 var logger = require('morgan');
-
 const configRoutes = require('./routes');
 
 var app = express();

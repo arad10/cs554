@@ -151,11 +151,10 @@ video {
 Navbar
 ======
 */
-.navbar {
-  height: 5rem;
-  display: flex;
-  align-items: center;
+
+.navigation {
   background-color: black;
+  height: 5rem;
 }
 .nav-center {
   display: flex;
@@ -168,6 +167,8 @@ Navbar
   display: flex;
   list-style-type: none;
   padding-top: 0.75rem;
+  float: right;
+  margin-right: 2%;
 }
 .nav-links a {
   text-transform: capitalize;
@@ -179,7 +180,6 @@ Navbar
   letter-spacing: 2px;
   font-size: 1.2rem;
   padding: 0.25rem 0.5rem;
-  transition: var(--mainTransition);
   text-decoration: none;
 }
 .nav-links a:hover {
@@ -190,4 +190,22 @@ Navbar
   width: 13rem;
   height: 4rem;
   float: left;
+}
+
+.error {
+  font-weight: bold;
+  color: red;
+}
+
+.forgotPassword {
+  background: none !important;
+  border: none !important;
+  text-decoration: underline;
+  margin-left: 5px;
+  color: #069;
+}
+
+.forgotPassword:hover {
+  text-decoration: none;
+  color: red;
 }
