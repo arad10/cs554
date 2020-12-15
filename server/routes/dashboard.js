@@ -16,6 +16,7 @@ router.post("/:id/addMessage", async (req, res) => {
     const addMessage = await dashboardAPIs.addChatMessage(id, msg);
     res.json(addMessage); //will return just the message
 });
+
 router.get('/', async(req, res)=>{
     try{
         let dashboardAll = await dashboardAPIs.getAllDashboards();

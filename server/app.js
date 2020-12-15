@@ -15,12 +15,12 @@ app.use(cors())
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
+// app.use((req, res, next) => {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//   next();
+// });
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -38,26 +38,23 @@ let server = app.listen(4000, () => {
 });
 
 let io = require("socket.io")(server, {
+  wsEngine: "ws",
   cors:{
     origin: "*"
   }
 }).listen(server);
 
-io.sockets.on("connection", (socket) => { //Where does room id go. In data???
-  socket.on("user_join", (data) => {
-    socket.join(data.roomID);
-    console.log("server connected ", data);
-    let msg = data.username + " has joined the chat"
-    io.to(data.roomID).emit("get_message", msg);
-  })
+io.sockets.on("connection", (socket) => {
+  let {roomID} = socket.handshake.query;
+  socket.join(roomID);
 
-  socket.on("chat_message", (data) => {
-    console.log("server got msg ", data);
-    io.to(data.roomID).emit("get_message", {username: data.username, msg: data.text}); //send username, and msg
+  socket.on("chat_message", (msg) => { //msg has msg and username
+    console.log("server got msg ", msg);
+    io.in(roomID).emit("chat_message", msg); //again is it io?????
     //add to chathistory here
   });
 
-  socket.on("disconnect", (username, message) => {
-
+  socket.on("disconnect", () => {
+    socket.leave(roomID);
   });
 });
