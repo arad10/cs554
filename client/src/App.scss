@@ -14,6 +14,8 @@ Video Chat Styling
 ==================
 */
 
+
+
 * {
   margin: 0;
   padding: 0;
@@ -41,6 +43,7 @@ header {
 h1 {
   font-weight: 300;
   padding: 0.4em 0;
+  text-align: center; 
 }
 
 #root {
@@ -213,4 +216,30 @@ Navbar
 .profile-icon {
   width: 30px;
   height: 30px;
+}
+
+
+.about {
+  padding-left: 100px;
+  padding-right: 100px;
+  padding-bottom: 50px;
+  text-align: center;
+}
+
+.main-text {
+  background-color: #697a77;
+  color: white;
+  padding: 50px; 
+}
+
+p.tech {
+
+  font-weight: bold;
+
+}
+
+img {
+  max-width: 250px;
+  height: 200px;
+
 }

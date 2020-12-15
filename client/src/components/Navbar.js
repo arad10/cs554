@@ -23,7 +23,7 @@ const NavbarAuth = ()  => {
       <ul className="nav-links">
           <li>
           <NavLink exact to="/" activeClassName="active">
-            Landing
+            About Us
           </NavLink>
         </li>
         <li>
@@ -69,7 +69,7 @@ const NavbarNonAuth = () => {
       <ul className="nav-links">
         <li>
           <NavLink exact to="/" activeClassName="active">
-            Landing
+            About Us
           </NavLink>
         </li>
 
