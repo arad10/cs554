@@ -14,6 +14,8 @@ const AllProjects = () => {
   });
   }, [])
 
+  console.log(proj)
+
 
   const projects = proj.map(project=>{
             return(

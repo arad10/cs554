@@ -74,7 +74,8 @@ module.exports = {
             if (currentUser.dashboards.includes(dashboard._id.toString)){
                 throw "Error: user is already a part of the dashboard!";
             }
-            
+            currentUser.dashboards.push(dashboard._id.toString());
+
             /* Adds this user to the users array in the dashboard collection */
             const updatedDashboardInfo = await dashboardsCollection.updateOne({_id: dashboard._id}, {$push: {'users': userId}});
             if (updatedDashboardInfo.modifiedCount === 0) {
@@ -86,6 +87,7 @@ module.exports = {
         if (updatedUserInfo.modifiedCount === 0) {
             throw 'Error: could not update user successfully.';
         }
+        console.log(updatedUserInfo)
 
         return await this.getUser(userId);
     }

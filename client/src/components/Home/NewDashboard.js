@@ -50,8 +50,6 @@ const project = {
   alert(`Creating project: ${name}...`)
   axios.post('/dashboard', project)
         .then(res => console.log(res)).catch(error=>console.log(error))
-  console.log(project)
-  // axios.patch(`/user/${currentUser.uid}`)
 }
 
 

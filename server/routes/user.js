@@ -50,7 +50,7 @@ router.patch("/:id", async (req, res) => {
   try{
     const user = await userAPI.getUser(xss(req.params.id));
     let userInfo = req.body;
-
+    console.log(userInfo)
     if (!userInfo) {
       res.status(400).json({error: 'You must provide data to update a user.'});
       return;
@@ -60,9 +60,11 @@ router.patch("/:id", async (req, res) => {
       res.status(400).json({error: 'You must provide at least the name or dashboards fields to update a user.'});
       return;
     }
-
     try{
+            console.log("here")
       const updatedUser = await userAPI.updateUser(xss(req.params.id), userInfo);
+      console.log("here")
+      console.log(updatedUser)
       res.status(200).json(updatedUser);
     }catch(e){
       res.status(500).json({error:e});
