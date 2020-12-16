@@ -11,29 +11,38 @@ const AllProjects = () => {
   useEffect(() => {
     async function dashboardData(){ 
       try{
-        axios('/dashboard')
-        .then(res => {
-        const data = res.data;
-        // console.log(res)
-        setProj(data);
-        })
-        .catch(error => console.log(error));
+          axios('/dashboard')
+          .then(res => {
+          const data = res.data;
+          setProj(data);
+          })
+          .catch(error => {
+            console.log(error)
+            alert("Oops something went wrong. Could not load all projects...")
+          })
       } catch(e){
         console.log(e)
+        alert("Oops something went wrong. Could not load all projects...")
       }
     }
   dashboardData();
   }, [])
 
 function handleOnClick(projID){
-  const addDashboard = {
-        dashboards: projID.toString()
-      };
-      console.log(currentUser.uid)
-      console.log(addDashboard)
-    axios.patch(`http://localhost:4000/user/${currentUser.uid}`, addDashboard)
-          .then(res => console.log(res))
-          .catch(error=>console.log(error))
+        alert("Joining project...")
+  try{
+    const addDashboard = {
+          dashboards: projID.toString()
+        };
+      axios.patch(`http://localhost:4000/user/${currentUser.uid}`, addDashboard)
+            .then(res => console.log(res))
+            .catch(error=>{
+              console.log(error)
+              alert("Oops! Something went wrong with joining this project...Are you a part of this project already?")
+            })
+    } catch(e){
+      console.log(e)
+    }
 }
 
 
@@ -41,13 +50,17 @@ function handleOnClick(projID){
   const projects = proj.map(project=>{
             return(
             <li>
+              <div className = "proj-name">
               <h2 className= "pname">{project.name}</h2>
               <p>{project.description}</p>
+              </div>
+              <div className = "proj-button">
               <Link to = {`dashboard/${project._id}`} className="link">
                 <button className="join">View</button>
               </Link>
               <button className="join" onClick={() => {handleOnClick(project._id)
               }}>Join</button>
+              </div>
               </li>
           )})
   return (
@@ -99,16 +112,19 @@ const Wrapper = styled.article`
     background: lightgray;
     padding: 20px;
     width: 90%;
-    height: 100px;  
+    height: 90px;  
     margin: 2%;
+    margin-left:5%;
+    color: black;
+
 
       }
   .link{
     text-decoration: none;
     color: black;
-    }
+  }
     .pname{
-      font-size: 14px;
+      font-size: 16px;
       text-align: left;
       font-weight: bold;
       margin:0px;
@@ -119,8 +135,14 @@ const Wrapper = styled.article`
       margin-right: 2px;
     }
     p{
-      font-size: 12px;
+      font-size: 13px;
       margin:0px;
+    }
+    .proj-button{
+      float: right;
+    }
+    .proj-name{
+      float: left;
     }
 
 `;
