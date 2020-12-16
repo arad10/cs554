@@ -83,91 +83,88 @@ export default function Dashboard(props) {
     )
   } else {
     return (
-      <div style={{display: 'flex', justifyContent: 'center', height: '100%'}}>
-        <DragDropContext onDragEnd={async (result) => await onDragEnd(result, userStories, setUserStories)}>
-          {Object.entries(userStories).map(([column, userStoryDetails]) => {
-            return (
-              <div
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center'
-                }}
-              >
-                <h2>{status[column]}</h2>
-                <Droppable key={column} droppableId={column}>
-                  {(provided, snapshot) => {
-                    return (
-                      <div
-                        {...provided.droppableProps}
-                        ref={provided.innerRef}
-                        style={{
-                          background: snapshot.isDraggingOver ? 'lightblue' : 'lightgrey',
-                          padding: 4,
-                          width: 250,
-                          minHeight: '50px',
-                          margin: 5,
-                          flexWrap: 'wrap',
-                          border: '2px dotted black'
-                        }}
-                      >
-                        {userStoryDetails.map((userStory, index) => {
-                          return (
-                            <Draggable key={userStory._id} draggableId={userStory._id} index={index}>
-                              {(provided, snapshot) => {
-                                return (
-                                  <div 
-                                    ref={provided.innerRef}
-                                    {...provided.draggableProps}
-                                    {...provided.dragHandleProps}
-                                    style={{
-                                      userSelect: 'none',
-                                      padding: 16,
-                                      margin: '0 0 8px 0',
-                                      minHeight: '50px',
-                                      backgroundColor: snapshot.isDragging ? 'aqua' : 'white',
-                                      color: 'black',
-                                      wordWrap: 'break-word',
-                                      borderRadius: '25px',
-                                      display: 'flex',
-                                      flexDirection: 'column',
-                                      ...provided.draggableProps.style
-                                    }}
-                                  >
-                                    {/* <Card style={{width: '18rem'}}>
-                                      <Card.Body>
-                                        <Card.Title>{userStory.storyName}</Card.Title>
-                                        <Card.Text>{userStory.description}</Card.Text>
-                                      </Card.Body>
-                                    </Card> */}
-                                    <h3>{userStory.storyName}</h3> <br />
-                                    <p>{userStory.description}</p> <br />
-                                    <div
-                                    style={{
-                                      fontSize: '0.75rem',
-                                      display: 'flex',
-                                      flexDirection: 'row',
-                                      justifyContent: 'space-between'
-                                    }}
-                                    >
-                                      <div>Created By: {userStory.creator} </div>
-                                      <div>Story Points: {userStory.storyPoints}</div>
-                                    </div>
-                                  </div>
-                                )
-                              }}
-                            </Draggable>
-                          )
-                        })}
-                        {provided.placeholder}
-                      </div>
-                    )
+      <div>
+        <div style={{display: 'flex', justifyContent: 'center', height: '100%'}}>
+          <DragDropContext onDragEnd={async (result) => await onDragEnd(result, userStories, setUserStories)}>
+            {Object.entries(userStories).map(([column, userStoryDetails]) => {
+              return (
+                <div
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center'
                   }}
-                </Droppable>
-              </div>
-            )
-          })}
-        </DragDropContext>
+                >
+                  <h2>{status[column]}</h2>
+                  <Droppable key={column} droppableId={column}>
+                    {(provided, snapshot) => {
+                      return (
+                        <div
+                          {...provided.droppableProps}
+                          ref={provided.innerRef}
+                          style={{
+                            background: snapshot.isDraggingOver ? 'lightblue' : 'lightgrey',
+                            padding: 4,
+                            width: 250,
+                            minHeight: '50px',
+                            margin: 5,
+                            flexWrap: 'wrap',
+                            border: '2px dotted black'
+                          }}
+                        >
+                          {userStoryDetails.map((userStory, index) => {
+                            return (
+                              <Draggable key={userStory._id} draggableId={userStory._id} index={index}>
+                                {(provided, snapshot) => {
+                                  return (
+                                    <div 
+                                      ref={provided.innerRef}
+                                      {...provided.draggableProps}
+                                      {...provided.dragHandleProps}
+                                      style={{
+                                        userSelect: 'none',
+                                        padding: 16,
+                                        margin: '0 0 8px 0',
+                                        minHeight: '50px',
+                                        backgroundColor: snapshot.isDragging ? 'aqua' : 'white',
+                                        color: 'black',
+                                        wordWrap: 'break-word',
+                                        borderRadius: '25px',
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        ...provided.draggableProps.style
+                                      }}
+                                    >
+                                      <h3>{userStory.storyName}</h3> <br />
+                                      <p>{userStory.description}</p> <br />
+                                      <div
+                                      style={{
+                                        fontSize: '0.75rem',
+                                        display: 'flex',
+                                        flexDirection: 'row',
+                                        justifyContent: 'space-between'
+                                      }}
+                                      >
+                                        <div>Created By: {userStory.creator} </div>
+                                        <div>Story Points: {userStory.storyPoints}</div>
+                                      </div>
+                                    </div>
+                                  )
+                                }}
+                              </Draggable>
+                            )
+                          })}
+                          {provided.placeholder}
+                        </div>
+                      )
+                    }}
+                  </Droppable>
+                </div>
+              )
+            })}
+          </DragDropContext>
+        </div>
+        <a style={{display: 'flex', justifyContent: 'center'}} href={`/dashboard/${dashboardInfo._id}/newuserstory`}>Post a New User Story</a>
       </div>
     )
   }

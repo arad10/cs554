@@ -26,11 +26,6 @@ router.post("/", async (req, res) => {
     return;
   }
 
-  if (!xss(userStoryInfo.dashboardName)) {
-    res.status(400).json({error: 'You must provide a dashboard name.'});
-    return;
-  }
-
   if (!xss(userStoryInfo.dashboardId)) {
     res.status(400).json({error: 'You must provide a dashboard id.'});
     return;
@@ -51,11 +46,6 @@ router.post("/", async (req, res) => {
     return;
   }
 
-  if (!xss(userStoryInfo.postedDate)) {
-    res.status(400).json({error: 'You must provide a posted date.'});
-    return;
-  }
-
   if (!xss(userStoryInfo.creator)) {
     res.status(400).json({error: 'You must provide a creator.'});
     return;
@@ -67,8 +57,8 @@ router.post("/", async (req, res) => {
   }
 
   try{
-    const { dashboardName, dashboardId, storyName, storyPoints, description, postedDate, creator, status } = userStoryInfo;
-    const newUserStory = await userStoryAPI.addUserStory(dashboardName, dashboardId, storyName, storyPoints, description, postedDate, creator, status);
+    const { dashboardId, storyName, storyPoints, description, creator, status } = userStoryInfo;
+    const newUserStory = await userStoryAPI.addUserStory(dashboardId, storyName, parseInt(storyPoints), description, creator, status);
     res.status(200).json(newUserStory);
   }catch(e){
     res.status(500).json({error:e});
