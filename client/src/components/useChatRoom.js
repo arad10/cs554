@@ -12,10 +12,11 @@ const useChatRoom = (roomID) => {
         await axios.post("http://localhost:4000/dashboard/" + roomID + "/addMessage", message) //use room id to post
     };
 
-    useEffect(() => {
+    useEffect(async () => { //made this async
         socket.current = socketIOClient(ENDPOINT, {
             query: {roomID: roomID}
         })
+        // setAllMsgs((await axios.get("http://localhost:4000/" + roomID)).chatHistory); //Need to set sample dashboard
 
         socket.current.on("chat_message", (newMsg) => {
             setAllMsgs((messages) => messages.concat([newMsg]));
