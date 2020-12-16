@@ -34,9 +34,9 @@ router.patch('/:id', async (req, res) => {
     const updateDashboard = await dashboardAPIs.updateDashboard(
         id,
         xss(req.body.origin),
-        xss(req.body.originList),
+        req.body.originList,
         xss(req.body.destination),
-        xss(req.body.destinationList)
+        req.body.destinationList
     );
     res.json(updateDashboard);
 });
