@@ -41,27 +41,34 @@ const MyProfile = () => {
           const { data } = await axios.get(`/user/${currentUser.uid}`).catch(error => console.log(error));
           setUserData(data)
       } catch(e){
+        alert("Oops something went wrong. Could find that user...")
         console.log(e)
       }
     }
     fetchData();
   },[])
 
-  //for each dashboard in userData.dashboards make and push to  all Project
+  //for each dashboard in userData.dashboards 
   useEffect(()=>{
     async function dashboardData(){
       console.log(Array.isArray(userData.dashboards))
-      if(userData !== undefined){
         try{
-          const dashboardIDs= userData.dashboards
-          for(const dashboard of dashboardIDs){
-            const { data } = await axios(`/dashboard/${dashboard}`).catch(error => console.log(error));
-            setMyProject(oldArray=>[...oldArray, data])
-          }
+            if(userData !== {}){
+              const dashboardIDs= userData.dashboards
+              if(dashboardIDs.length!==0){
+                for(const dashboard of dashboardIDs){
+                  const { data } = await axios(`/dashboard/${dashboard}`).catch(error => console.log(error));
+                  setMyProject(oldArray=>[...oldArray, data])
+                }
+              } else{
+                alert("Loading my projects")
+              }
+            } else{
+                alert("Looking for user")
+            }
         }catch(e){
           console.log(e)
         }
-      }
     }
     dashboardData();
 
@@ -70,11 +77,15 @@ const MyProfile = () => {
   const projects = myProject.map(project=>{
     return(
             <li>
+              <div className = "proj-name">
               <h2 className= "pname">{project.name}</h2>
               <p>{project.description}</p>
+              </div>
+              <div className = "proj-button">
               <Link to = {`/dashboard/${project._id}`} className="link">
                 <button className="join">View</button>
               </Link>
+              </div>
               </li>
           )})
   
@@ -84,7 +95,7 @@ const MyProfile = () => {
       <div className="profile">
       <div className = "info">
         <h1 className = "myProject">My Projects</h1>
-        <h2 className = "username">{currentUser.email}</h2>  
+        <p className="username">{currentUser.email}</p>
         </div>
         <ul>
           {projects}
@@ -118,7 +129,7 @@ const Wrapper = styled.article`
   .username{
     font-size:20px;
     font-weight: lighter;
-    text-align: left;
+    text-align: center;
 
   }
   ul{
@@ -135,8 +146,10 @@ const Wrapper = styled.article`
     background: lightgray;
     padding: 20px;
     width: 90%;
-    height: 100px;  
+    height: 90px;  
     margin: 2%;
+    color: black;
+    margin-left:5%;
 
       }
   .link{
@@ -157,6 +170,12 @@ const Wrapper = styled.article`
     p{
       font-size: 12px;
       margin:0px;
+    }
+    .proj-button{
+      float: right;
+    }
+    .proj-name{
+      float: left;
     }
 `;
 export default MyProfile;

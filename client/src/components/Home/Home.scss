@@ -1,8 +1,25 @@
 .project-links {
   display: flex;
   margin-left: 2%;
+  font-family: sans-serif;
 }
 li {
-  margin-left: 2px;
+  margin-left: 10px;
   list-style: none;
+}
+.close-button {
+  padding: 0;
+  padding-right: 5px;
+  padding-left: 5px;
+  margin-left: 90%;
+}
+
+label {
+  text-align: left;
+}
+form {
+  text-align: left;
+}
+.submit {
+  margin-left: 39%;
 }
