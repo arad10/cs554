@@ -2,19 +2,40 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import axios from "axios"
+import firebase from "firebase/app"
 
 
 const AllProjects = () => {
+  const currentUser = firebase.auth().currentUser
   const [proj, setProj] = useState([]);
   useEffect(() => {
-    axios('/dashboard').then(res => {
-    const data = res.data;
-    console.log(res)
-    setProj(data);
-  });
+    async function dashboardData(){ 
+      try{
+        axios('/dashboard')
+        .then(res => {
+        const data = res.data;
+        // console.log(res)
+        setProj(data);
+        })
+        .catch(error => console.log(error));
+      } catch(e){
+        console.log(e)
+      }
+    }
+  dashboardData();
   }, [])
 
-  console.log(proj)
+function handleOnClick(projID){
+  const addDashboard = {
+        dashboards: projID.toString()
+      };
+      console.log(currentUser.uid)
+      console.log(addDashboard)
+    axios.patch(`http://localhost:4000/user/${currentUser.uid}`, addDashboard)
+          .then(res => console.log(res))
+          .catch(error=>console.log(error))
+}
+
 
 
   const projects = proj.map(project=>{
@@ -25,7 +46,8 @@ const AllProjects = () => {
               <Link to = {`dashboard/${project._id}`} className="link">
                 <button className="join">View</button>
               </Link>
-              <button className="join">Join</button>
+              <button className="join" onClick={() => {handleOnClick(project._id)
+              }}>Join</button>
               </li>
           )})
   return (

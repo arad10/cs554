@@ -34,40 +34,47 @@ const MyProfile = () => {
   const currentUser = firebase.auth().currentUser
   const [myProject, setMyProject] = useState([])
   const [userData, setUserData] = useState({})
-  const allProject = []
   //set user data
   useEffect(()=>{
-    axios(`/user/${currentUser.uid}`).then(res=>{
-        const data=res.data;
-        console.log(data)
-        setUserData(data)
-      })
+    async function fetchData(){
+      try{
+          const { data } = await axios.get(`/user/${currentUser.uid}`).catch(error => console.log(error));
+          setUserData(data)
+      } catch(e){
+        console.log(e)
+      }
+    }
+    fetchData();
   },[])
 
   //for each dashboard in userData.dashboards make and push to  all Project
   useEffect(()=>{
-    if(userData.dashboards){
-    const dashboardIDs= Object.values(userData.dashboards)
-    dashboardIDs.forEach(dashboard =>{
-    axios(`/dashboard/${dashboard}`).then(res=>{
-      const data = res.data;
-      setMyProject(oldArray=>[...oldArray, data])
-
-    })
-    })
+    async function dashboardData(){
+      console.log(Array.isArray(userData.dashboards))
+      if(userData !== undefined){
+        try{
+          const dashboardIDs= userData.dashboards
+          for(const dashboard of dashboardIDs){
+            const { data } = await axios(`/dashboard/${dashboard}`).catch(error => console.log(error));
+            setMyProject(oldArray=>[...oldArray, data])
+          }
+        }catch(e){
+          console.log(e)
+        }
+      }
     }
+    dashboardData();
+
   }, [userData])
-  console.log(myProject)
 
   const projects = myProject.map(project=>{
     return(
             <li>
               <h2 className= "pname">{project.name}</h2>
               <p>{project.description}</p>
-              <Link to = {`dashboard/${project._id}`} className="link">
+              <Link to = {`/dashboard/${project._id}`} className="link">
                 <button className="join">View</button>
               </Link>
-              <button className="join">Join</button>
               </li>
           )})
   
@@ -84,11 +91,11 @@ const MyProfile = () => {
         </ul>
       </div>
     </Wrapper>
-  );
-};
+  )
+};  
 
 const Wrapper = styled.article`
- .profile {
+  .profile {
     background: rgb(216, 238, 235);
     width: 60%;
     border-radius: 10px;

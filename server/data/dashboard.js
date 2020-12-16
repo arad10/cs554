@@ -1,7 +1,5 @@
 const mongoCollections = require("../config/mongoCollections");
 const dashboards = mongoCollections.dashboards;
-const users = mongoCollections.users;
-const userAPI = require('./user');
 const { ObjectId } = require("mongodb");
 
 async function getAllDashboards() {
@@ -48,9 +46,9 @@ async function addDashboard(name, description, date, creatorID) {
     if (insertDashboard.insertedCount === 0)
         throw "ERROR: Could not create the dashboard.";
     const newDashboardID = insertDashboard.insertedId;
-
-    //add new dashboard id to user dashboard array
-    // const user = await userAPI.getUser(creatorID)
+     //add new dashboard id to user dashboard array
+    const users = mongoCollections.users;
+    const userAPI = require('./user');
     const usersCollection = await users();
     const updateUserInfo = await usersCollection.updateOne({_id: creatorID}, {$push: {'dashboards':newDashboardID}});
     if(updateUserInfo.modifiedCount===0) throw 'Error: could not update user sucessfully'
