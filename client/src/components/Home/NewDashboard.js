@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import Modal from 'react-modal';
 import styled from "styled-components";
 import axios from "axios";
+import firebase from "firebase/app"
 
 const customStyles = {
   content : {
@@ -23,7 +24,7 @@ export default function NewDashboard() {
   const [name, setName] = useState("")
   const [description, setDescription] = useState("")
   const [date, setDate] = useState("")
-  const [creator, setCreator] = useState("")
+  const currentUser = firebase.auth().currentUser
 
   function openModal() {
     setIsOpen(true);
@@ -44,11 +45,11 @@ const project = {
       name: name,
       description: description,
       date:date,
-      creator:creator
+      creator: currentUser.uid
     };
   alert(`Creating project: ${name}...`)
   axios.post('/dashboard', project)
-        .then(res => console.log(res)).catch(error=>console.log(error)) 
+        .then(res => console.log(res)).catch(error=>console.log(error))
 }
 
 
@@ -70,8 +71,6 @@ const project = {
             <label>Description:<input type="text" value={description} onChange ={e=>setDescription(e.target.value)} name="desc"  required /></label>
             <br></br>
             <label>Date:<input type="text" value={date} onChange ={e=>setDate(e.target.value)} name="date" required/></label>
-            <br></br>
-            <label>Creator:<input type="text" value={creator} onChange ={e=>setCreator(e.target.value)} name="creator" required/></label>
             <br></br>
               <button className="submit" type="submit">Submit</button>
               </form>
