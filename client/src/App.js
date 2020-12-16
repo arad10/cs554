@@ -28,7 +28,7 @@ function App() {
       </div>
       <Route exact path="/" component={Landing} />
       <PrivateRoute path="/home" component={Home} />
-      <PrivateRoute path="/dashboard" component={Dashboard} />
+      <PrivateRoute path="/dashboard/:id" component={Dashboard} />
       <PrivateRoute path="/account" component={Account} />     
       <PrivateRoute path="/chat" component={Chat} />
       <PrivateRoute path="/videochat" component={VideoChat} />

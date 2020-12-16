@@ -59,7 +59,7 @@ async function updateDashboard(dashboardID, origin, originList, destination, des
     if (!destination || typeof destination !== "string")
         throw "ERROR: Destination does not exist or is not of type string";
     if (!destinationList || !Array.isArray(destinationList))
-        throw "ERROR: User Story ID does not exist or is not of type string";
+        throw "ERROR: Destination List does not exist or is not of type string";
     const dashboardCollection = await dashboards();
     const dashboard = await getDashboard(dashboardID);
     dashboard.userStories[origin] = originList;

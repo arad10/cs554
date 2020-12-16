@@ -91,6 +91,11 @@ router.patch("/:id", async (req, res) => {
       return;
     }
 
+    if (userStoryInfo.status === userStory.status) {
+      res.status(200).json(userStory);
+      return;
+    }
+    
     try{
       const updatedUserStory = await userStoryAPI.updateUserStory(xss(req.params.id), userStoryInfo);
       res.status(200).json(updatedUserStory);
