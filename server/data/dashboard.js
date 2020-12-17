@@ -95,6 +95,7 @@ async function addChatMessage(dashboardID, message){
     else if(message.msg === undefined || message.msg === null || typeof message.msg !== "string"){
         throw "ERROR: Message doesn't contain the message or is not of type string";
     }
+    else if(!message.senderSocket || typeof message.senderSocket !== "string");
     const dashboardCollection = await dashboards();
     let dashboard = await getDashboard(dashboardID);
     let messages = dashboard.chatHistory;
@@ -104,7 +105,7 @@ async function addChatMessage(dashboardID, message){
     if(addedChatInfo.modifiedCount === 0){
         throw "ERROR: Could not add chat message to history";
     }
-    return message; //dont really need the return
+    return message;
 }
 
 module.exports = {
