@@ -47,7 +47,7 @@ export default function Dashboard(props) {
       return;
     }
     const { source, destination } = result;
-    if (source === destination) {
+    if (source.droppableId === destination.droppableId) {
       return;
     }
     const originColumn = columns[source.droppableId]
