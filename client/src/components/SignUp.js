@@ -4,6 +4,7 @@ import { doCreateUserWithEmailAndPassword } from '../firebase/FirebaseFunctions'
 import { AuthContext } from '../firebase/Auth'; 
 import SocialSignIn from './SocialSignIn'; 
 import '../App.scss';
+import axios from "axios"
 
 function SignUp() {
 
@@ -22,13 +23,23 @@ function SignUp() {
         passwordOne.value,
         displayName
       );
+      
     } catch (error) {
       alert(error);
     }
   }; 
 
+
   if (currentUser) {
+    //post current user to mongo
+    const mongoUser = {
+        id: currentUser.uid,
+        name: currentUser.email
+    }
+    axios.post('/user', mongoUser).then(res => console.log(res)).catch(error=>console.log(error)) 
+
     return <Redirect to="/home" />; 
+
   }
   
   

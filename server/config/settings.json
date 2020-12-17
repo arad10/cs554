@@ -1,6 +1,6 @@
 {
     "mongoConfig": {
-        "serverUrl": "mongodb://localhost:27017/",
+        "serverUrl": "mongodb+srv://JANCHDB:JANCH@janch.renmy.mongodb.net/JANCHAgile?retryWrites=true&w=majority",
         "database": "JANCHAgile"
     }
 }

@@ -2,21 +2,21 @@ import {useEffect, useRef, useState} from "react";
 import socketIOClient from "socket.io-client";
 import axios from "axios";
 
-const ENDPOINT = "http://localhost:4000";
+const ENDPOINT = "/";
 
 const useChatRoom = (roomID) => {
     const [allMsgs, setAllMsgs] = useState([]);
     const socket = useRef() //Want socket to persiste throughout whole component lifespan
 
     const addToHistory = async (message) => {
-        await axios.post("http://localhost:4000/dashboard/" + roomID + "/addMessage", message) //use room id to post
+        // await axios.post("/dashboard/" + roomID + "/addMessage", message) //use room id to post
     };
 
     useEffect(async () => { //made this async
         socket.current = socketIOClient(ENDPOINT, {
             query: {roomID: roomID}
         })
-        // setAllMsgs((await axios.get("http://localhost:4000/" + roomID)).chatHistory); //Need to set sample dashboard
+        // setAllMsgs((await axios.get("/" + roomID)).chatHistory); //Need to set sample dashboard
 
         socket.current.on("chat_message", (newMsg) => {
             setAllMsgs((messages) => messages.concat([newMsg]));

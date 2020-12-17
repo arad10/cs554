@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { AuthContext } from '../firebase/Auth'; 
 import { doChangePassword } from '../firebase/FirebaseFunctions'; 
-
 import '../App.scss';
 
 function ChangePassword() {
@@ -89,8 +88,7 @@ function ChangePassword() {
     return (
       <div>
         <h2>
-          You are signed in using a Social Media Provider, You cannot change
-          your password
+          You are signed in using a Social Media Provider, you cannot change your password.
         </h2>
       </div>
     );

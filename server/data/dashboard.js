@@ -49,6 +49,12 @@ async function addDashboard(name, description, date, creatorID) {
     if (insertDashboard.insertedCount === 0)
         throw "ERROR: Could not create the dashboard.";
     const newDashboardID = insertDashboard.insertedId;
+     //add new dashboard id to user dashboard array
+    const users = mongoCollections.users;
+    const userAPI = require('./user');
+    const usersCollection = await users();
+    const updateUserInfo = await usersCollection.updateOne({_id: creatorID}, {$push: {'dashboards':newDashboardID}});
+    if(updateUserInfo.modifiedCount===0) throw 'Error: could not update user sucessfully'
     return await getDashboard(newDashboardID.toString());
 }
 
@@ -62,7 +68,7 @@ async function updateDashboard(dashboardID, origin, originList, destination, des
     if (!destination || typeof destination !== "string")
         throw "ERROR: Destination does not exist or is not of type string";
     if (!destinationList || !Array.isArray(destinationList))
-        throw "ERROR: User Story ID does not exist or is not of type string";
+        throw "ERROR: Destination List does not exist or is not of type string";
     const dashboardCollection = await dashboards();
     const dashboard = await getDashboard(dashboardID);
     dashboard.userStories[origin] = originList;

@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import firebase from "firebase/app"
+import axios from "axios";
 
 //dummy data for now
+
 const profileInfo = {
     id: 1,
     username: "jessvalenzuela",
@@ -28,25 +31,79 @@ const dashboards = [
 ]
 
 const MyProfile = () => {
-  // for each project id in id array, should get the projects by id and display name. when click on name brings to dashboard (when backend is built).
-  const projects = dashboards.map(project=>{
-            return(
-          <Link to = {`dashboard/${project.id}`} className="link"><li>{project.dashboardName}</li></Link>
+  const currentUser = firebase.auth().currentUser
+  const [myProject, setMyProject] = useState([])
+  const [userData, setUserData] = useState({})
+  //set user data
+  useEffect(()=>{
+    async function fetchData(){
+      try{
+          const { data } = await axios.get(`/user/${currentUser.uid}`).catch(error => console.log(error));
+          setUserData(data)
+      } catch(e){
+        alert("Oops something went wrong. Could find that user...")
+        console.log(e)
+      }
+    }
+    fetchData();
+  },[])
+
+  //for each dashboard in userData.dashboards 
+  useEffect(()=>{
+    async function dashboardData(){
+      console.log(Array.isArray(userData.dashboards))
+        try{
+            if(userData !== {}){
+              const dashboardIDs= userData.dashboards
+              if(dashboardIDs.length!==0){
+                for(const dashboard of dashboardIDs){
+                  const { data } = await axios(`/dashboard/${dashboard}`).catch(error => console.log(error));
+                  setMyProject(oldArray=>[...oldArray, data])
+                }
+              } else{
+                alert("Loading my projects")
+              }
+            } else{
+                alert("Looking for user")
+            }
+        }catch(e){
+          console.log(e)
+        }
+    }
+    dashboardData();
+
+  }, [userData])
+
+  const projects = myProject.map(project=>{
+    return(
+            <li>
+              <div className = "proj-name">
+              <h2 className= "pname">{project.name}</h2>
+              <p>{project.description}</p>
+              </div>
+              <div className = "proj-button">
+              <Link to = {`/dashboard/${project._id}`} className="link">
+                <button className="join">View</button>
+              </Link>
+              </div>
+              </li>
           )})
+  
+
   return (
     <Wrapper>
       <div className="profile">
       <div className = "info">
         <h1 className = "myProject">My Projects</h1>
-        <h2 className = "username">@{profileInfo.username}</h2>  
+        <p className="username">{currentUser.email}</p>
         </div>
         <ul>
           {projects}
         </ul>
       </div>
     </Wrapper>
-  );
-};
+  )
+};  
 
 const Wrapper = styled.article`
   .profile {
@@ -56,7 +113,6 @@ const Wrapper = styled.article`
     margin: auto;
     padding-bottom: 2%;
     margin-bottom: 2%;
-
 
 
   }
@@ -71,10 +127,10 @@ const Wrapper = styled.article`
 
   }
   .username{
+    font-size:20px;
     font-weight: lighter;
-    text-align: left;
-    color: black;
-    font-size: 20px;
+    text-align: center;
+
   }
   ul{
     width:95%;
@@ -90,14 +146,36 @@ const Wrapper = styled.article`
     background: lightgray;
     padding: 20px;
     width: 90%;
-    height: 60px;  
+    height: 90px;  
     margin: 2%;
+    color: black;
+    margin-left:5%;
 
       }
   .link{
     text-decoration: none;
     color: black;
-
+    }
+    .pname{
+      font-size: 14px;
+      text-align: left;
+      font-weight: bold;
+      margin:0px;
+    }
+    .join{
+      height:25px;
+      font-size:12px;
+      margin-right: 2px;
+    }
+    p{
+      font-size: 12px;
+      margin:0px;
+    }
+    .proj-button{
+      float: right;
+    }
+    .proj-name{
+      float: left;
     }
 `;
 export default MyProfile;

@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import MyProfile from "./MyProfile"
 import AllProjects from "./AllProjects"
 import './Home.scss';
 import NewDashboard from "./NewDashboard"
+import firebase from "firebase/app"
 
 export default function Home() {
+  const currentUser = firebase.auth().currentUser
   const [showMyProject, setMyProject] = useState(true)
   const [showAllProject, setAllProject] = useState(false)
 
@@ -20,9 +22,9 @@ export default function Home() {
     return (
       <div>
         <ul className = "project-links">
-          <li><button onClick={() => {handleMyProjects()
+          <li><button className = "projects" onClick={() => {handleMyProjects()
           }}>My Projects</button></li>
-          <li><button onClick={() => {handleAllProjects()
+          <li><button className = "projects" onClick={() => {handleAllProjects()
           }}>All Projects</button></li>
           <li><NewDashboard/></li>
         </ul>
@@ -33,9 +35,9 @@ export default function Home() {
   return (
       <div>
         <ul className = "project-links">
-          <li><button onClick={() => {handleMyProjects()
+          <li><button className = "projects" onClick={() => {handleMyProjects()
           }}>My Projects</button></li>
-          <li><button onClick={() => {handleAllProjects()
+          <li><button  className = "projects" onClick={() => {handleAllProjects()
           }}>All Projects</button></li>
           <li><NewDashboard/></li>
 

@@ -41,6 +41,7 @@ header {
 h1 {
   font-weight: 300;
   padding: 0.4em 0;
+  text-align: center;
 }
 
 #root {
@@ -96,6 +97,9 @@ button {
 }
 button:hover {
   filter: brightness(150%);
+}
+button:focus {
+  outline: none;
 }
 
 .room {
@@ -208,4 +212,31 @@ Navbar
 .forgotPassword:hover {
   text-decoration: none;
   color: red;
+}
+
+.profile-icon {
+  width: 30px;
+  height: 30px;
+}
+
+.about {
+  padding-left: 100px;
+  padding-right: 100px;
+  padding-bottom: 50px;
+  text-align: center;
+}
+
+.main-text {
+  background-color: #697a77;
+  color: white;
+  padding: 50px;
+}
+
+p.tech {
+  font-weight: bold;
+}
+
+img {
+  max-width: 250px;
+  height: 200px;
 }

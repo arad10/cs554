@@ -5,13 +5,11 @@ const dashboardAPI = require('./dashboard');
 const { ObjectId } = require("mongodb");
 
 module.exports = {
-    async addUserStory(dashboardName, dashboardId, storyName, storyPoints, description, postedDate, creator, status){
-        if (!dashboardName || typeof dashboardName !== 'string') throw 'Error: dashboardName not supplied or is not a string.';
+    async addUserStory(dashboardId, storyName, storyPoints, description, creator, status){
         if (!dashboardId || typeof dashboardId !== 'string') throw 'Error: dashboardId not supplied or is not a string.';
         if (!storyName || typeof storyName !== 'string') throw 'Error: storyName not supplied or is not a string.';
         if (!storyPoints || typeof storyPoints !== 'number') throw 'Error: storyPoints not supplied or is not a number.';
         if (!description || typeof description !== 'string') throw 'Error: description not supplied or is not a string.';
-        if (!postedDate || typeof postedDate !== 'string') throw 'Error: postedDate not supplied or is not a string.';
         if (!creator || typeof creator !== 'string') throw 'Error: creator id not supplied or is not a string.';
         if (!status || typeof status !== 'string') throw 'Error: status not supplied or is not a string.';
 
@@ -19,12 +17,10 @@ module.exports = {
         const dashboardsCollection = await dashboards();
        
         let userStory = {
-            dashboardName: dashboardName,
             dashboardId: dashboardId,
             storyName: storyName,
             storyPoints: storyPoints,
             description: description,
-            postedDate: postedDate,
             creator: creator,
             status: status
         };
