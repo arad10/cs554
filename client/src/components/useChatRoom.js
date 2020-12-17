@@ -9,7 +9,7 @@ const useChatRoom = (data) => {
     const socket = useRef() //Want socket to persiste throughout whole component lifespan
 
     const addToHistory = async (message) => {
-        await axios.post("/dashboard/" + data.roomID + "/addMessage", message) //use room id to post
+        await axios.post("/dashboard/" + data.roomID + "/addMessage", message)
     };
 
     useEffect(async () => { //made this async
@@ -19,8 +19,10 @@ const useChatRoom = (data) => {
 
         socket.current.on("chat_message", (newMsg) => {
             setAllMsgs((messages) => messages.concat([newMsg]));
-            addToHistory(newMsg); //dont have dashboard yet
-        })
+            if(newMsg.senderSocket === socket.current.id){
+                addToHistory(newMsg);
+            }            
+        });
 
         return () => {
             socket.current.disconnect(); //disconnect when done
@@ -30,8 +32,8 @@ const useChatRoom = (data) => {
     const sendMsg = (msg) => {
         socket.current.emit("chat_message", {
             username: msg.username,
-            msg: msg.msg
-            // sender: socket.current.id used for owned by curr user
+            msg: msg.msg,
+            senderSocket: socket.current.id
         });
     };
 
