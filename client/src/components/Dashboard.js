@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import axios from 'axios';
+import Chat from './Chat';
+import firebase from "firebase/app"
 const status = {
   'backlog': 'Backlog',
   'todo': 'To-Do',
@@ -21,7 +23,8 @@ export default function Dashboard(props) {
         name: data.name,
         date: data.date,
         creator: data.creator,
-        description: data.description
+        description: data.description,
+        chatHistory: data.chatHistory
       });
       let currUserStories = data.userStories;
       let allDetailsOfUserStories = await Promise.all(Object.entries(currUserStories).map(async ([column, userStoryIDs]) => {
@@ -162,10 +165,11 @@ export default function Dashboard(props) {
                 </div>
               )
             })}
-          </DragDropContext>
+          </DragDropContext>          
         </div>
-        <a style={{display: 'flex', justifyContent: 'center'}} href={`/dashboard/${dashboardInfo._id}/newuserstory`}>Post a New User Story</a>
+        <a style={{display: 'flex', justifyContent: 'center'}} href={`/dashboard/${dashboardInfo._id}/newuserstory`}>Post a New User Story</a>        
         <a style={{display: 'flex', justifyContent: 'center'}} href={`/videochat/${dashboardInfo._id}`}>Video Chat</a>
+        <Chat dashID={dashboardInfo._id} username={firebase.auth().currentUser.displayName} chatHistory={dashboardInfo.chatHistory}></Chat>
       </div>
     )
   }

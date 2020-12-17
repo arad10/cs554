@@ -1,6 +1,7 @@
 const mongoCollections = require("../config/mongoCollections");
 const dashboards = mongoCollections.dashboards;
 const { ObjectId } = require("mongodb");
+const { dashboard } = require(".");
 
 async function getAllDashboards() {
     const dashboardCollection = await dashboards();
@@ -9,6 +10,7 @@ async function getAllDashboards() {
     
 }
 async function getDashboard(id) {
+    console.log(id);
     if (!id || typeof id !== "string") throw "ERROR: Dashboard ID not provided or is not of type string";
     if (!ObjectId.isValid(id))
         throw "ERROR: Dashboard ID is not valid. Please pass in a single string of 12 bytes or 24 hex characters";
@@ -40,8 +42,9 @@ async function addDashboard(name, description, date, creatorID) {
             todo: [],
             inProgress: [],
             complete: []
-        }
-    }
+        },
+        chatHistory: []
+    };
     const insertDashboard = await dashboardCollection.insertOne(newDashboard);
     if (insertDashboard.insertedCount === 0)
         throw "ERROR: Could not create the dashboard.";
@@ -79,9 +82,36 @@ async function updateDashboard(dashboardID, origin, originList, destination, des
     return await getDashboard(dashboardID);
 }
 
+async function addChatMessage(dashboardID, message){
+    console.log(message);
+    if(!dashboardID || typeof dashboardID !== "string"){
+        throw "ERROR: Dashboard ID does not exist or is not of type string";
+    }
+    else if(!message || typeof message !== "object"){
+        throw "ERROR: Message does not exist or is not of type object";;
+    }
+    else if(!message.username || typeof message.username !== "string"){
+        throw "ERROR: Message doesn't contain a username or is not of type string";
+    }
+    else if(message.msg === undefined || message.msg === null || typeof message.msg !== "string"){
+        throw "ERROR: Message doesn't contain the message or is not of type string";
+    }
+    const dashboardCollection = await dashboards();
+    let dashboard = await getDashboard(dashboardID);
+    let messages = dashboard.chatHistory;
+    messages.push(message);
+    dashboard.chatHistory = messages;
+    const addedChatInfo = await dashboardCollection.updateOne({_id: dashboard._id}, {$set: dashboard});
+    if(addedChatInfo.modifiedCount === 0){
+        throw "ERROR: Could not add chat message to history";
+    }
+    return message; //dont really need the return
+}
+
 module.exports = {
     getDashboard,
     addDashboard,
     updateDashboard,
+    addChatMessage,
     getAllDashboards
 };
