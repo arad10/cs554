@@ -167,7 +167,7 @@ export default function Dashboard(props) {
             })}
           </DragDropContext>          
         </div>
-        <a style={{display: 'flex', justifyContent: 'center'}} href={`/dashboard/${dashboardInfo._id}/newuserstory`}>Post a New User Story</a>        
+        <a style={{display: 'flex', justifyContent: 'center'}} href={`/dashboards/${dashboardInfo._id}/newuserstory`}>Post a New User Story</a>        
         <a style={{display: 'flex', justifyContent: 'center'}} href={`/videochat/${dashboardInfo._id}`}>Video Chat</a>
         <Chat dashID={dashboardInfo._id} username={firebase.auth().currentUser.displayName} chatHistory={dashboardInfo.chatHistory}></Chat>
       </div>
