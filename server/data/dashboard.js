@@ -1,7 +1,6 @@
 const mongoCollections = require("../config/mongoCollections");
 const dashboards = mongoCollections.dashboards;
 const { ObjectId } = require("mongodb");
-const { dashboard } = require(".");
 
 async function getAllDashboards() {
     const dashboardCollection = await dashboards();
@@ -54,7 +53,7 @@ async function addDashboard(name, description, date, creatorID) {
     const userAPI = require('./user');
     const usersCollection = await users();
     const updateUserInfo = await usersCollection.updateOne({_id: creatorID}, {$push: {'dashboards':newDashboardID}});
-    if(updateUserInfo.modifiedCount===0) throw 'Error: could not update user sucessfully'
+    if(updateUserInfo.modifiedCount===0) throw 'Error: could not update user sucessfully';
     return await getDashboard(newDashboardID.toString());
 }
 

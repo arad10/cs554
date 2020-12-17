@@ -7,7 +7,7 @@ import { text } from 'body-parser';
 
 function Chat(props) {
   const roomID = props.dashID;
-  const {allMsgs, sendMsg} = useChatRoom(roomID);
+  const {allMsgs, sendMsg} = useChatRoom({roomID: roomID, chatHist: props.chatHistory});
   const [sentMessage, setSentMessage] = useState("");
 
   let transmitMsg = () => {
