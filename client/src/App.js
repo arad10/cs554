@@ -32,7 +32,7 @@ function App() {
       <PrivateRoute exact path="/dashboard/:id" component={Dashboard} />
       <PrivateRoute path="/account" component={Account} />     
       <PrivateRoute path="/chat" component={Chat} />
-      <PrivateRoute path="/videochat" component={VideoChat} />
+      <PrivateRoute path="/videochat/:id" component={VideoChat} />
       <PrivateRoute exact path="/dashboard/:id/newuserstory" component={NewUserStoryFrom} />
 
       <Route path="/signin" component={SignIn} />
