@@ -34,7 +34,7 @@ function handleOnClick(projID){
     const addDashboard = {
           dashboards: projID.toString()
         };
-      axios.patch(`http://localhost:4000/user/${currentUser.uid}`, addDashboard)
+      axios.patch(`/user/${currentUser.uid}`, addDashboard)
             .then(res => console.log(res))
             .catch(error=>{
               console.log(error)
@@ -55,7 +55,7 @@ function handleOnClick(projID){
               <p>{project.description}</p>
               </div>
               <div className = "proj-button">
-              <Link to = {`dashboard/${project._id}`} className="link">
+              <Link to = {`dashboards/${project._id}`} className="link">
                 <button className="join">View</button>
               </Link>
               <button className="join" onClick={() => {handleOnClick(project._id)
