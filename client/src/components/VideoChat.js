@@ -1,55 +1,48 @@
-import React, {useState, useCallback} from 'react';
-import Lobby from './Lobby';
+import React, {useState, useCallback, useEffect} from 'react';
+import { Redirect } from "react-router-dom";
+import firebase from "firebase/app"
 import Room from './Room';
 
-const VideoChat = () => {
-    const [username, setUsername] = useState('');
-    const [roomName, setRoomName] = useState('');
+const VideoChat = (props) => {
     const [token, setToken] = useState(null);
+    const [redirect, setRedirect] = useState(null);
 
-    const handleUsernameChange = useCallback( (event) => {
-        setUsername(event.target.value);
+    useEffect(() => {
+        async function generateToken(){
+            const data = await fetch('/videochat/video/token', {
+                method: 'POST',
+                body: JSON.stringify({
+                  identity: firebase.auth().currentUser.displayName,
+                  room: props.match.params.id
+                }),
+                headers: {
+                  'Content-Type': 'application/json'
+                }
+              }).then(res => res.json());
+              
+            setToken(data.token);
+        }
+        generateToken();
     }, []);
-    
-    const handleRoomNameChange = useCallback( (event) => {
-        setRoomName(event.target.value);
-    }, []);
-
-    const handleSubmit = useCallback(async event => {
-        event.preventDefault();
-        const data = await fetch('/videochat/video/token', {
-          method: 'POST',
-          body: JSON.stringify({
-            identity: username,
-            room: roomName
-          }),
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        }).then(res => res.json());
-        setToken(data.token);
-    }, [username, roomName]);
 
     const handleLogout = useCallback(event => {
         setToken(null);
+        setRedirect(`/dashboard/${props.match.params.id}`)
     }, []);
 
     let render;
     if (token) {
         render = (
-            <Room roomName={roomName} token={token} handleLogout={handleLogout} />
-        );
-    } else {
-        render = (
-        <Lobby
-            username={username}
-            roomName={roomName}
-            handleUsernameChange={handleUsernameChange}
-            handleRoomNameChange={handleRoomNameChange}
-            handleSubmit={handleSubmit}
-        />
+            <Room roomName={props.match.params.id} token={token} handleLogout={handleLogout} />
         );
     }
+    else if (redirect) {
+        render = <Redirect to={redirect} />
+    }
+    else {
+        render = <h2>Loading...</h2>
+    }
+
     return render;
 };
 
