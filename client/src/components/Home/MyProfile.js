@@ -55,13 +55,13 @@ const MyProfile = () => {
         try{
             if(userData !== {}){
               const dashboardIDs= userData.dashboards
-              if(dashboardIDs.length!==0){
+              if(dashboardIDs !== undefined){
                 for(const dashboard of dashboardIDs){
                   const { data } = await axios(`/dashboard/${dashboard}`).catch(error => console.log(error));
                   setMyProject(oldArray=>[...oldArray, data])
                 }
               } else{
-                alert("Loading my projects")
+                console.log("Loading Projects...")
               }
             } else{
                 alert("Looking for user")
@@ -157,7 +157,7 @@ const Wrapper = styled.article`
     color: black;
     }
     .pname{
-      font-size: 14px;
+      font-size: 16px;
       text-align: left;
       font-weight: bold;
       margin:0px;
@@ -168,7 +168,7 @@ const Wrapper = styled.article`
       margin-right: 2px;
     }
     p{
-      font-size: 12px;
+      font-size: 13px;
       margin:0px;
     }
     .proj-button{

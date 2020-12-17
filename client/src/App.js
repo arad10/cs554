@@ -17,7 +17,7 @@ import NewUserStoryFrom from './components/NewUserStoryForm';
 import { AuthProvider } from './firebase/Auth'; 
 import PrivateRoute from './components/PrivateRoute'; 
 import Axios from "axios";
-
+import NotFound from "./components/NotFound"
 function App() {
   return (
     <AuthProvider>
@@ -27,16 +27,21 @@ function App() {
           <Navbar />
         </header>
       </div>
+      <Switch >
       <Route exact path="/" component={Landing} />
-      <PrivateRoute path="/home" component={Home} />
+      <PrivateRoute exact path="/home" component={Home} />
       <PrivateRoute exact path="/dashboard/:id" component={Dashboard} />
       <PrivateRoute path="/account" component={Account} />     
       <PrivateRoute path="/chat" component={Chat} />
-      <PrivateRoute path="/videochat" component={VideoChat} />
+      <PrivateRoute path="/videochat/:id" component={VideoChat} />
       <PrivateRoute exact path="/dashboard/:id/newuserstory" component={NewUserStoryFrom} />
-
-      <Route path="/signin" component={SignIn} />
-      <Route path="/signup" component={SignUp} />
+//       <PrivateRoute exact path="/account" component={Account} />     
+//       <PrivateRoute exact path="/chat" component={Chat} />
+//       <PrivateRoute exact path="/videochat" component={VideoChat} />
+      <Route exact path="/signin" component={SignIn} />
+      <Route exact path="/signup" component={SignUp} />
+      <PrivateRoute path="*" component={NotFound} />
+    </Switch>
     </Router>    
     </AuthProvider>
   ); 
