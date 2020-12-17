@@ -13,6 +13,7 @@ import Chat from './components/Chat';
 import SignIn from './components/SignIn'; 
 import SignUp from './components/SignUp'; 
 import VideoChat from './components/VideoChat'; 
+import NewUserStoryFrom from './components/NewUserStoryForm';
 import { AuthProvider } from './firebase/Auth'; 
 import PrivateRoute from './components/PrivateRoute'; 
 import Axios from "axios";
