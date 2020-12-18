@@ -1,12 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import firebase from 'firebase/app';
 import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 
 export default function NewUserStoryForm(props) {
     const [ formSubmitted, setFormSubmitted ] = useState(false);
-    const [ dashboardID, setDashboardID ] = useState(props.match.params.id)
+    const [ dashboardID, setDashboardID ] = useState(props.match.params.id);
+    const [ userCanPost, setUserCanPost ] = useState(true);
+
+    useEffect(() => {
+        async function checkUser(){
+            const uid = firebase.auth().currentUser.uid;
+            const { data } = await axios.get(`/dashboard/${props.match.params.id}`);
+            if (!data.users.includes(uid)){
+                setUserCanPost(false);
+            }
+        }
+        checkUser();
+    }, [props.match.params.id]);
+
     if (formSubmitted) {
-        return <h1>Your user story has been posted!</h1>
-    } else {
+        return <Redirect to={`/dashboards/${dashboardID}`} />
+    } 
+    else if(!userCanPost){
+        return <h1>You must join the dashboard to post a user story!</h1>
+    }
+    else {
         let nameOfStory, storyPoints, storyDescription, creator, status;
         return (
             <form className="form" onSubmit={ async (e) => {
@@ -17,7 +36,7 @@ export default function NewUserStoryForm(props) {
                         storyName: nameOfStory.value,
                         storyPoints: storyPoints.value,
                         description: storyDescription.value,
-                        creator: creator.value,
+                        creator: firebase.auth().currentUser.displayName,
                         status: status.value
                     });
                 } catch (error) {
@@ -26,20 +45,9 @@ export default function NewUserStoryForm(props) {
                 nameOfStory.value = '';
                 storyPoints.value = '';
                 storyDescription.value = '';
-                creator.value = '';
                 status.value = '';
                 setFormSubmitted(true);
             }}>
-                <div className="form-group">
-                    <label>Poster Name</label>
-                    <br />
-                    <input ref={(posterName) => {
-                        creator = posterName
-                    }} required autoFocus={true}
-                    />
-                    <br />
-                </div>
-                <br />
                 <div className="form-group">
                     <label>Story Name</label>
                     <br />
