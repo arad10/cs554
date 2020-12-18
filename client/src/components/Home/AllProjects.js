@@ -59,7 +59,8 @@ function handleOnClick(projID){
               <p>{project.description}</p>
               </div>
               <div className = "proj-button">
-                <Link to = {`dashboard/${project._id}`} className="link">
+
+              <Link to = {`dashboards/${project._id}`} className="link">
                 <button className="join">View</button>
               </Link>
               </div>

@@ -27,7 +27,7 @@ const VideoChat = (props) => {
 
     const handleLogout = useCallback(event => {
         setToken(null);
-        setRedirect(`/dashboard/${props.match.params.id}`)
+        setRedirect(`/dashboards/${props.match.params.id}`)
     }, []);
 
     let render;
