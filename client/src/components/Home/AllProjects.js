@@ -49,22 +49,36 @@ function handleOnClick(projID){
 
 
   const projects = proj.map(project=>{
-            return(
+    console.log(project.users)
+    if(project.users.includes(currentUser.uid)){
+          return(
             <li>
               <div className = "proj-name">
               <h2 className= "pname">{project.name}</h2>
               <p>{project.description}</p>
               </div>
               <div className = "proj-button">
-              {/* <button className="join" onClick={() => {handleOnClick(project._id)
-              }}>Join</button>
                 <Link to = {`dashboard/${project._id}`} className="link">
                 <button className="join">View</button>
-              </Link> */}
-              <ButtonComponent project = {project} />
+              </Link>
               </div>
               </li>
-          )})
+          )
+    } else{
+      return(
+        <li>
+              <div className = "proj-name">
+              <h2 className= "pname">{project.name}</h2>
+              <p>{project.description}</p>
+              </div>
+              <div className = "proj-button">
+              <button className="join" onClick={() => {handleOnClick(project._id)
+              }}>Join</button>
+              </div>
+              </li>
+      )
+    }
+})
   return (
     <Wrapper>
       <div className="profile">
