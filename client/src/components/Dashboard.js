@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
+import Chat from './Chat';
+import firebase from "firebase/app"
 const status = {
   'backlog': 'Backlog',
   'todo': 'To-Do',
@@ -21,7 +24,8 @@ export default function Dashboard(props) {
         name: data.name,
         date: data.date,
         creator: data.creator,
-        description: data.description
+        description: data.description,
+        chatHistory: data.chatHistory
       });
       let currUserStories = data.userStories;
       let allDetailsOfUserStories = await Promise.all(Object.entries(currUserStories).map(async ([column, userStoryIDs]) => {
@@ -47,7 +51,7 @@ export default function Dashboard(props) {
       return;
     }
     const { source, destination } = result;
-    if (source === destination) {
+    if (source.droppableId === destination.droppableId) { // 'droppableId' fixes issue with moving a user story to the same column
       return;
     }
     const originColumn = columns[source.droppableId]
@@ -162,10 +166,23 @@ export default function Dashboard(props) {
                 </div>
               )
             })}
-          </DragDropContext>
+          </DragDropContext>          
         </div>
-        <a style={{display: 'flex', justifyContent: 'center'}} href={`/dashboard/${dashboardInfo._id}/newuserstory`}>Post a New User Story</a>
-        <a style={{display: 'flex', justifyContent: 'center'}} href={`/videochat/${dashboardInfo._id}`}>Video Chat</a>
+        <div className="link-dashboard">
+          <Link className="Link-dashboard" to={`/dashboards/${dashboardInfo._id}/newuserstory`}>
+            <button type="button" className="dashboard-btn">
+              <span>Post a New User Story</span>
+            </button>
+          </Link>
+        </div>
+        <div className="link-dashboard">
+          <Link className="Link-dashboard" to={`/videochat/${dashboardInfo._id}`}>
+            <button type="button" className="dashboard-btn">
+              <span>Video Chat</span>
+            </button>
+          </Link>
+        </div>
+        <Chat dashID={dashboardInfo._id} username={firebase.auth().currentUser.displayName} chatHistory={dashboardInfo.chatHistory}></Chat>
       </div>
     )
   }

@@ -30,11 +30,11 @@ function App() {
       <Switch >
       <Route exact path="/" component={Landing} />
       <PrivateRoute exact path="/home" component={Home} />
-      <PrivateRoute exact path="/dashboard/:id" component={Dashboard} />
+      <PrivateRoute exact path="/dashboards/:id" component={Dashboard} />
       <PrivateRoute path="/account" component={Account} />     
       <PrivateRoute path="/chat" component={Chat} />
       <PrivateRoute path="/videochat/:id" component={VideoChat} />
-      <PrivateRoute exact path="/dashboard/:id/newuserstory" component={NewUserStoryFrom} />
+      <PrivateRoute exact path="/dashboards/:id/newuserstory" component={NewUserStoryFrom} />
 //       <PrivateRoute exact path="/account" component={Account} />     
 //       <PrivateRoute exact path="/chat" component={Chat} />
 //       <PrivateRoute exact path="/videochat" component={VideoChat} />
