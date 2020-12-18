@@ -49,7 +49,7 @@ const Room = ({ roomName, token, handleLogout }) => {
     return (
         <div className="room">
             <h2>Team Video Chat Room</h2>
-            <button onClick={handleLogout}>Log out</button>
+            <button onClick={handleLogout}>Disconnect</button>
             <div className="local-participant">
             {room ? (
                 <Participant
