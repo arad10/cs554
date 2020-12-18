@@ -38,11 +38,6 @@ const NavbarAuth = ()  => {
           </NavLink>
         </li> */}
         <li>
-          <NavLink exact to="/videochat" activeClassName="active">
-            Video Chat
-          </NavLink>
-        </li>
-        <li>
           <NavLink exact to="/account" activeClassName="active">
             <img src = "https://bethesdadentalhealth.com/wp-content/uploads/2016/10/profile-icon-png-898.png" className = "profile-icon" alt = "profile"></img>
           </NavLink>
