@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import Chat from './Chat';
+import NotFound from './NotFound';
 import firebase from "firebase/app"
 const status = {
   'backlog': 'Backlog',
@@ -15,32 +16,39 @@ export default function Dashboard(props) {
   const [ userStories, setUserStories ] = useState({});
   const [ dashboardInfo, setDashboardInfo ] = useState({});
   const [ loading, setLoading ] = useState(true);
+  const [ redirect, setRedirect ] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
-      const { data } = await axios.get(`/dashboard/${props.match.params.id}`);
-      setDashboardInfo({
-        _id: data._id,
-        name: data.name,
-        date: data.date,
-        creator: data.creator,
-        description: data.description,
-        chatHistory: data.chatHistory
-      });
-      let currUserStories = data.userStories;
-      let allDetailsOfUserStories = await Promise.all(Object.entries(currUserStories).map(async ([column, userStoryIDs]) => {
-        return Promise.all(userStoryIDs.map(async (userStoryID) => {
-          const {data} = await axios.get(`/userstory/${userStoryID}`);
-          return data;
+      try{
+        const { data } = await axios.get(`/dashboard/${props.match.params.id}`);
+        setDashboardInfo({
+          _id: data._id,
+          name: data.name,
+          date: data.date,
+          creator: data.creator,
+          description: data.description,
+          chatHistory: data.chatHistory
+        });
+        let currUserStories = data.userStories;
+        let allDetailsOfUserStories = await Promise.all(Object.entries(currUserStories).map(async ([column, userStoryIDs]) => {
+          return Promise.all(userStoryIDs.map(async (userStoryID) => {
+            const {data} = await axios.get(`/userstory/${userStoryID}`);
+            return data;
+          }));
         }));
-      }));
-      let userStoriesMap = {};
-      userStoriesMap['backlog'] = allDetailsOfUserStories[0];
-      userStoriesMap['todo'] = allDetailsOfUserStories[1];
-      userStoriesMap['inProgress'] = allDetailsOfUserStories[2];
-      userStoriesMap['complete'] = allDetailsOfUserStories[3]
-      setUserStories(userStoriesMap);
-      setLoading(false);
+        let userStoriesMap = {};
+        userStoriesMap['backlog'] = allDetailsOfUserStories[0];
+        userStoriesMap['todo'] = allDetailsOfUserStories[1];
+        userStoriesMap['inProgress'] = allDetailsOfUserStories[2];
+        userStoriesMap['complete'] = allDetailsOfUserStories[3]
+        setUserStories(userStoriesMap);
+        setLoading(false);
+      }
+      catch(e){
+        setRedirect(true);
+        setLoading(false);
+      }
     }
     fetchData();
   }, []);
@@ -86,6 +94,10 @@ export default function Dashboard(props) {
       </div>
     )
   } else {
+    if (redirect){
+      return (<NotFound />)
+    } 
+    else{
     return (
       <div>
         <div style={{display: 'flex', justifyContent: 'center', height: '100%'}}>
@@ -185,5 +197,6 @@ export default function Dashboard(props) {
         <Chat dashID={dashboardInfo._id} username={firebase.auth().currentUser.displayName} chatHistory={dashboardInfo.chatHistory}></Chat>
       </div>
     )
+    }
   }
 }

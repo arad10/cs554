@@ -6,8 +6,13 @@ const dashboardAPIs = require("../data").dashboard;
 
 router.get('/:id', async (req, res) => {
     const id = xss(req.params.id);
-    const dashboard = await dashboardAPIs.getDashboard(id);
-    res.json(dashboard);
+    try{
+        const dashboard = await dashboardAPIs.getDashboard(id);
+        res.json(dashboard);
+    }
+    catch(e){
+        res.status(404).json({message: "Dashboard not found."});
+    }
 });
 
 router.post("/:id/addMessage", async (req, res) => {
