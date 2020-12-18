@@ -4,32 +4,6 @@ import { Link } from "react-router-dom";
 import firebase from "firebase/app"
 import axios from "axios";
 
-//dummy data for now
-
-const profileInfo = {
-    id: 1,
-    username: "jessvalenzuela",
-    dashboards: [1, 2, 3]
-  }
-const dashboards = [
-  {
-    id:1,
-    dashboardName: "Dashboard 1",
-  },
-  {
-    id:2,
-    dashboardName: "Dashboard 2"
-  },
-  {
-    id:3,
-    dashboardName: "Dashboard 3"
-  },
-    {
-    id:4,
-    dashboardName: "Dashboard 4"
-  }
-]
-
 const MyProfile = () => {
   const currentUser = firebase.auth().currentUser
   const [myProject, setMyProject] = useState([])
@@ -41,7 +15,7 @@ const MyProfile = () => {
           const { data } = await axios.get(`/user/${currentUser.uid}`).catch(error => console.log(error));
           setUserData(data)
       } catch(e){
-        alert("Oops something went wrong. Could find that user...")
+        alert("Oops something went wrong. Couldn't find that user...")
         console.log(e)
       }
     }
