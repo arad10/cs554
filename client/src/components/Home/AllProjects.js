@@ -3,7 +3,8 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import axios from "axios"
 import firebase from "firebase/app"
-
+import ButtonComponent from "./Button"
+import Button from "./Button";
 
 const AllProjects = () => {
   const currentUser = firebase.auth().currentUser
@@ -34,7 +35,7 @@ function handleOnClick(projID){
     const addDashboard = {
           dashboards: projID.toString()
         };
-      axios.patch(`http://localhost:4000/user/${currentUser.uid}`, addDashboard)
+      axios.patch(`/user/${currentUser.uid}`, addDashboard)
             .then(res => console.log(res))
             .catch(error=>{
               console.log(error)
@@ -55,11 +56,12 @@ function handleOnClick(projID){
               <p>{project.description}</p>
               </div>
               <div className = "proj-button">
-              <Link to = {`dashboard/${project._id}`} className="link">
-                <button className="join">View</button>
-              </Link>
-              <button className="join" onClick={() => {handleOnClick(project._id)
+              {/* <button className="join" onClick={() => {handleOnClick(project._id)
               }}>Join</button>
+                <Link to = {`dashboard/${project._id}`} className="link">
+                <button className="join">View</button>
+              </Link> */}
+              <ButtonComponent project = {project} />
               </div>
               </li>
           )})
