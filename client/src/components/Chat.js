@@ -21,7 +21,8 @@ function Chat(props) {
   };
 
   return (
-    <div>
+    <div className="Chat">
+      <h4>Chat:</h4>
       <ul>
         {allMsgs.map((msg) => {
           return (

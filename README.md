@@ -30,8 +30,9 @@ npm run prod
 npm run seed
 ```
 
-This will load data into our MongoDB Atlas cloud database, for use on Heroku. If the app is ran locally, the server url in /server/config/settings.json can be
-changed to a local MongoDb host. 
+This will load data into our MongoDB Atlas cloud database, for use on both Heroku or the locally-run app. The server url in 
+/server/config/settings.json can be changed to a local MongoDB host if needed, but the app would then just need to be run locally 
+instead of on Heroku.
 
 ## Three Course Technologies:
 
