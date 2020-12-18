@@ -169,7 +169,7 @@ export default function Dashboard(props) {
           </DragDropContext>          
         </div>
         <div className="link-dashboard">
-          <Link className="Link-dashboard" to={`/dashboard/${dashboardInfo._id}/newuserstory`}>
+          <Link className="Link-dashboard" to={`/dashboards/${dashboardInfo._id}/newuserstory`}>
             <button type="button" className="dashboard-btn">
               <span>Post a New User Story</span>
             </button>
