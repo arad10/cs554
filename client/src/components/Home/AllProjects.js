@@ -3,8 +3,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import axios from "axios"
 import firebase from "firebase/app"
-import ButtonComponent from "./Button"
-import Button from "./Button";
+
 
 const AllProjects = () => {
   const currentUser = firebase.auth().currentUser
