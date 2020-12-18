@@ -29,6 +29,9 @@ async function doCreateUserWithEmailAndPassword(email, password, displayName) {
       socialProvider = new firebase.auth.FacebookAuthProvider();
     } else if (provider === 'twitter') {
       socialProvider = new firebase.auth.TwitterAuthProvider(); 
+    } else if (provider === 'github') {
+      socialProvider = new firebase.auth.GithubAuthProvider(); 
+
     }
     await firebase.auth().signInWithPopup(socialProvider);
   }

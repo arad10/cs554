@@ -4,6 +4,7 @@ import { doSocialSignIn } from '../firebase/FirebaseFunctions';
 import google from '../images/google_sign_in.png'; 
 import facebook from '../images/facebook_sign_in.png'; 
 import twitter from '../images/twitter_sign_in.png'; 
+import github from '../images/github_sign_in.png'; 
 import styled from "styled-components";
 import firebase from "firebase/app"
 import axios from "axios"
@@ -41,6 +42,12 @@ const SocialSignIn = () => {
             onClick={() => socialSignOn('twitter')}
             alt="twitter" 
             src={twitter}  className="media-img"/>
+
+            <img 
+            onClick={() => socialSignOn('github')}
+            alt="github" 
+            src={github}  className="media-img"/>
+
 
 
         </div>
