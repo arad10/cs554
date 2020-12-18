@@ -3,8 +3,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import axios from "axios"
 import firebase from "firebase/app"
-import ButtonComponent from "./Button"
-import Button from "./Button";
+
 
 const AllProjects = () => {
   const currentUser = firebase.auth().currentUser
@@ -41,6 +40,8 @@ function handleOnClick(projID){
               console.log(error)
               alert("Oops! Something went wrong with joining this project...Are you a part of this project already?")
             })
+      window.location.reload();
+
     } catch(e){
       console.log(e)
     }
@@ -66,7 +67,7 @@ function handleOnClick(projID){
           )
     } else{
       return(
-        <li>
+          <li>
               <div className = "proj-name">
               <h2 className= "pname">{project.name}</h2>
               <p>{project.description}</p>
@@ -75,7 +76,7 @@ function handleOnClick(projID){
               <button className="join" onClick={() => {handleOnClick(project._id)
               }}>Join</button>
               </div>
-              </li>
+            </li>
       )
     }
 })
