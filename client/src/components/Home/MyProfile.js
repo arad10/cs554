@@ -56,8 +56,8 @@ const MyProfile = () => {
               <p>{project.description}</p>
               </div>
               <div className = "proj-button">
-              <Link to = {`/dashboards/${project._id}`} className="link">
-                <button className="join">View</button>
+              <Link to = {`/dashboards/${project._id}`} className="link-button">
+                View
               </Link>
               </div>
               </li>
@@ -136,10 +136,11 @@ const Wrapper = styled.article`
       font-weight: bold;
       margin:0px;
     }
-    .join{
+    .link-button{
       height:25px;
       font-size:12px;
       margin-right: 2px;
+      color: white;
     }
     p{
       font-size: 13px;

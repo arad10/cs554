@@ -277,3 +277,17 @@ img {
 .not-found {
   text-align: center;
 }
+.link-button {
+  background: #333e5a;
+  color: #fff;
+  font-size: 16px;
+  padding: 0.4em;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  margin-top: 2px;
+}
+.link-button:hover {
+  filter: brightness(150%);
+  color: #fff;
+  text-decoration: none;
+}
