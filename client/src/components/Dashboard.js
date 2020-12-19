@@ -59,7 +59,7 @@ export default function Dashboard(props) {
       return;
     }
     const { source, destination } = result;
-    if (source.droppableId === destination.droppableId) { // 'droppableId' fixes issue with moving a user story to the same column
+    if (source.droppableId === destination.droppableId && source.index === destination.index) {
       return;
     }
     const originColumn = columns[source.droppableId]
