@@ -87,6 +87,14 @@ export default function Dashboard(props) {
     });
   }
 
+  let name;
+  if (firebase.auth().currentUser.displayName){
+    name = firebase.auth().currentUser.displayName;
+  }
+  else{
+    name = firebase.auth().currentUser.email;
+  }
+
   if (loading) {
     return (
       <div>
@@ -190,7 +198,7 @@ export default function Dashboard(props) {
               <span>Video Chat</span>
           </Link>
         </div>
-        <Chat dashID={dashboardInfo._id} username={firebase.auth().currentUser.displayName} chatHistory={dashboardInfo.chatHistory}></Chat>
+        <Chat dashID={dashboardInfo._id} username={name} chatHistory={dashboardInfo.chatHistory}></Chat>
       </div>
     )
     }
