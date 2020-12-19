@@ -49,25 +49,25 @@ export default function NewUserStoryForm(props) {
                 setFormSubmitted(true);
             }}>
                 <div className="form-group">
-                    <label>Story Name</label>
+                    <label for="input1">Story Name</label>
                     <br />
-                    <input ref={(storyName) => {
+                    <input id="input1" ref={(storyName) => {
                         nameOfStory = storyName
                     }} required autoFocus={true} />
                 </div>
                 <br />
                 <div className="form-group">
-                    <label>Story Points</label>
+                    <label for="input2">Story Points</label>
                     <br />
-                    <input type="number" ref={(points) => {
+                    <input id="input2" type="number" ref={(points) => {
                         storyPoints = points
                     }} required autoFocus={true} />
                 </div>
                 <br />
                 <div className="form-group">
-                    <label>Description</label>
+                    <label for="input3">Description</label>
                     <br />
-                    <input ref={(description) => {
+                    <input id="input3" ref={(description) => {
                         storyDescription = description
                     }} required autoFocus={true}
                     />

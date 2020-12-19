@@ -33,9 +33,10 @@ function Chat(props) {
         })}
       </ul>
       <br />
-      <textarea value={sentMessage} onChange={updateMsg}></textarea>
+      <label for="textbox">Enter message:</label>
+      <textarea id="textbox" value={sentMessage} onChange={updateMsg}></textarea>
       <br/>
-      <button onClick={transmitMsg}>Send Message</button>
+      <button id="chat" onClick={transmitMsg}>Send Message</button>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.dev.js"></script>
     </div>
   );

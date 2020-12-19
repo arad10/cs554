@@ -101,6 +101,14 @@ form > div > input {
   padding-left: 20px;
 }
 
+label, textarea {
+  display: block;
+}
+
+#chat {
+  margin-bottom: 20px;
+}
+
 .dashboard-btn {
   background: #333e5a;
   color: #fff;
