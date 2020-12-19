@@ -33,10 +33,10 @@ const SocialSignIn = () => {
             alt="google" 
             src={google} className="media-img"/>
 
-            <img 
-            onClick={() => socialSignOn('facebook')}
-            alt="facebook" 
-            src={facebook} className="media-img" />
+//             <img 
+//             onClick={() => socialSignOn('facebook')}
+//             alt="facebook" 
+//             src={facebook} className="media-img" />
 
             <img 
             onClick={() => socialSignOn('twitter')}
