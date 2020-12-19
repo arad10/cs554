@@ -7,12 +7,20 @@ const VideoChat = (props) => {
     const [token, setToken] = useState(null);
     const [redirect, setRedirect] = useState(null);
 
+    let name;
+    if (firebase.auth().currentUser.displayName){
+        name = firebase.auth().currentUser.displayName;
+    }
+    else{
+        name = firebase.auth().currentUser.email;
+    }
+
     useEffect(() => {
         async function generateToken(){
             const data = await fetch('/videochat/video/token', {
                 method: 'POST',
                 body: JSON.stringify({
-                  identity: firebase.auth().currentUser.displayName,
+                  identity: name,
                   room: props.match.params.id
                 }),
                 headers: {

@@ -19,6 +19,14 @@ export default function NewUserStoryForm(props) {
         checkUser();
     }, [props.match.params.id]);
 
+    let name;
+    if (firebase.auth().currentUser.displayName){
+        name = firebase.auth().currentUser.displayName;
+    }
+    else{
+        name = firebase.auth().currentUser.email;
+    }
+
     if (formSubmitted) {
         return <Redirect to={`/dashboards/${dashboardID}`} />
     } 
@@ -36,7 +44,7 @@ export default function NewUserStoryForm(props) {
                         storyName: nameOfStory.value,
                         storyPoints: storyPoints.value,
                         description: storyDescription.value,
-                        creator: firebase.auth().currentUser.displayName,
+                        creator: name,
                         status: status.value
                     });
                 } catch (error) {
