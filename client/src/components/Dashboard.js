@@ -181,17 +181,13 @@ export default function Dashboard(props) {
           </DragDropContext>          
         </div>
         <div className="link-dashboard">
-          <Link className="Link-dashboard" to={`/dashboards/${dashboardInfo._id}/newuserstory`}>
-            <button type="button" className="dashboard-btn">
+          <Link className="link-button" to={`/dashboards/${dashboardInfo._id}/newuserstory`}>
               <span>Post a New User Story</span>
-            </button>
           </Link>
         </div>
         <div className="link-dashboard">
-          <Link className="Link-dashboard" to={`/videochat/${dashboardInfo._id}`}>
-            <button type="button" className="dashboard-btn">
+          <Link className="link-button" to={`/videochat/${dashboardInfo._id}`}>
               <span>Video Chat</span>
-            </button>
           </Link>
         </div>
         <Chat dashID={dashboardInfo._id} username={firebase.auth().currentUser.displayName} chatHistory={dashboardInfo.chatHistory}></Chat>
