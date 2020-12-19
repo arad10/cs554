@@ -22,7 +22,7 @@ function Chat(props) {
 
   return (
     <div className="Chat">
-      <h4>Chat:</h4>
+      <h3>Chat:</h3>
       <ul>
         {allMsgs.map((msg) => {
           return (

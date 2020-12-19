@@ -87,9 +87,9 @@ function ChangePassword() {
   } else {
     return (
       <div>
-        <h2>
+        <h1>
           You are signed in using a Social Media Provider, you cannot change your password.
-        </h2>
+        </h1>
       </div>
     );
   }

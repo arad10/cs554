@@ -111,7 +111,7 @@ export default function Dashboard(props) {
                     alignItems: 'center'
                   }}
                 >
-                  <h2>{status[column]}</h2>
+                  <h1>{status[column]}</h1>
                   <Droppable key={column} droppableId={column}>
                     {(provided, snapshot) => {
                       return (
@@ -119,13 +119,13 @@ export default function Dashboard(props) {
                           {...provided.droppableProps}
                           ref={provided.innerRef}
                           style={{
-                            background: snapshot.isDraggingOver ? 'lightblue' : 'lightgrey',
+                            background: snapshot.isDraggingOver ? '#e6ffff' : '#006666',
                             padding: 4,
                             width: 250,
                             minHeight: '50px',
                             margin: 5,
                             flexWrap: 'wrap',
-                            border: '2px dotted black'
+                            border: '2px dotted white'
                           }}
                         >
                           {userStoryDetails.map((userStory, index) => {
@@ -142,8 +142,8 @@ export default function Dashboard(props) {
                                         padding: 16,
                                         margin: '0 0 8px 0',
                                         minHeight: '50px',
-                                        backgroundColor: snapshot.isDragging ? 'aqua' : 'white',
-                                        color: 'black',
+                                        backgroundColor: snapshot.isDragging ? '#6c7d7a' : '#c6e7e3',
+                                        color: snapshot.isDragging ? 'white' : 'black', 
                                         wordWrap: 'break-word',
                                         borderRadius: '25px',
                                         display: 'flex',
@@ -151,7 +151,7 @@ export default function Dashboard(props) {
                                         ...provided.draggableProps.style
                                       }}
                                     >
-                                      <h3>{userStory.storyName}</h3> <br />
+                                      <h2>{userStory.storyName}</h2> <br />
                                       <p>{userStory.description}</p> <br />
                                       <div
                                       style={{
