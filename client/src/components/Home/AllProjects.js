@@ -53,7 +53,7 @@ function handleOnClick(projID){
     console.log(project.users)
     if(project.users.includes(currentUser.uid)){
           return(
-            <li>
+            <li key = {project.name}>
               <div className = "proj-name">
               <h2 className= "pname">{project.name}</h2>
               <p>{project.description}</p>

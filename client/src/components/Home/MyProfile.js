@@ -50,7 +50,7 @@ const MyProfile = () => {
 
   const projects = myProject.map(project=>{
     return(
-            <li>
+            <li key = {project.name}>
               <div className = "proj-name">
               <h2 className= "pname">{project.name}</h2>
               <p>{project.description}</p>
