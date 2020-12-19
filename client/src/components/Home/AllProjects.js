@@ -147,7 +147,7 @@ const Wrapper = styled.article`
       font-weight: bold;
       margin:0px;
     }
-    .link-button{
+    .link-button, .join{
       height:25px;
       font-size:12px;
       margin-right: 2px;
