@@ -4,6 +4,7 @@ import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import Chat from './Chat';
 import NotFound from './NotFound';
+import CantViewDashboard from './CantViewDashboard';
 import firebase from "firebase/app"
 const status = {
   'backlog': 'Backlog',
@@ -17,11 +18,21 @@ export default function Dashboard(props) {
   const [ dashboardInfo, setDashboardInfo ] = useState({});
   const [ loading, setLoading ] = useState(true);
   const [ redirect, setRedirect ] = useState(false);
+  const [ userCanView, setUserCanView ] = useState(true);
 
   useEffect(() => {
     async function fetchData() {
       try{
         const { data } = await axios.get(`/dashboard/${props.match.params.id}`);
+
+        if(true){
+          let uid = firebase.auth().currentUser.uid;
+          const { data } = await axios.get(`/user/${uid}`);
+          if(!data.dashboards.includes(props.match.params.id)){
+            setUserCanView(false);
+          }
+        }
+
         setDashboardInfo({
           _id: data._id,
           name: data.name,
@@ -105,6 +116,9 @@ export default function Dashboard(props) {
     if (redirect){
       return (<NotFound />)
     } 
+    else if(!userCanView){
+      return (<CantViewDashboard />)
+    }
     else{
     return (
       <div>
