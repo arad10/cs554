@@ -12,7 +12,8 @@ On each agile board page there will be a chat and video chat feature. We will ut
 
 ## Access JANCH on Heroku
 
-https://janch.herokuapp.com (Note: it may take a few seconds for Heroku to load the app for the first time)
+https://janch.herokuapp.com (Note: it may take a few seconds for Heroku to load the app for the first time. Also, https must be used in order for Twilio Video
+Chat to work.)
 
 ## Run JANCH Locally
 
